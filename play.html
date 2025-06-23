@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Entha Chitram!</title>
+    <link rel="icon" href="images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/play.css" />
+  </head>
+  <body>
+    <h1><a class="logo" href="#" onclick="goHome()">🎬 Entha Chitram!</a></h1>
+    <div id="container">
+      <div class="day-control">
+        <a href="select-day.html"> <button>Other Dates</button></a>
+        <button id="prevBtn" onclick="changeDay(-1)">
+          ← &nbsp; Previous Day
+        </button>
+        <button id="nextBtn" onclick="changeDay(1)">Next Day &nbsp; →</button>
+        <select id="daySelect" onchange="manualDayChange()"></select>
+      </div>
+
+      <form class="input-row" onsubmit="submitGuess(event)">
+        <input type="text" id="guessInput" placeholder="Enter movie name" />
+        <button type="submit" class="submit">Submit</button>
+      </form>
+
+      <p id="feedback"></p>
+
+      <div class="hint-row">
+        <div id="hints"></div>
+        <button id="hintBtn" onclick="revealNextHint()">New Hint</button>
+      </div>
+
+      <div id="answerContainer">
+        <strong></strong> <span id="finalAnswer"></span>
+      </div>
+    </div>
+    <div id="countdown" class="countdown">🕒 Countdown...</div>
+
+    <div id="resultModal" class="modal">
+      <div class="modal-content">
+        <h2 id="resultTitle">Title</h2>
+        <p id="resultMessage">Message</p>
+        <div
+          id="modalButtons"
+          style="
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <script src="scripts/play.js"></script>
+  </body>
+</html>

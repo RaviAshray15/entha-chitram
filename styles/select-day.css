@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@500;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Urbanist", sans-serif;
+  background-color: #f2ecff;
+  color: #2e1065;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.back {
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  cursor: pointer;
+  color: #6a42b8;
+  padding-left: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back:hover {
+  color: #4c1d95;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #7e57c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 20px;
+  max-width: 600px;
+  width: 100%;
+  justify-content: center;
+}
+
+.day {
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: transform 0.2s, background-color 0.2s;
+  text-align: center;
+}
+
+.day:hover {
+  transform: scale(1.05);
+  background-color: #ede9fe;
+}
+
+.status {
+  display: block;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+::selection {
+  background-color: #7e57c2;
+  color: white;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 16px;
+  color: #6b21a8;
+}
+
+#countdown {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.countdown {
+  font-size: 20px;
+  color: #6a42b8;
+}
+
+@media screen and (max-width: 500px) {
+  .back {
+    left: 20px;
+  }
+  #countdown {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .title {
+    font-size: 24px;
+  }
+  .day {
+    font-size: 16px;
+    padding: 15px;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  .back {
+    font-size: 30px;
+    padding-left: 15px;
+  }
+  #countdown {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .title {
+    font-size: 20px;
+  }
+  .day {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  .back {
+    font-size: 26px;
+    padding-left: 10px;
+  }
+  #countdown {
+    font-size: 16px;
+  }
+}
+
+

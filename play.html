@@ -27,7 +27,22 @@
 
       <div class="hint-row">
         <div id="hints"></div>
-        <button id="hintBtn" onclick="revealNextHint()">New Hint</button>
+
+        <div id="buttonColumn">
+          <button id="hintBtn" onclick="revealNextHint()">New Hint</button>
+          <button id="detailsBtn" onclick="showDetails()" disabled>
+            Show Details
+          </button>
+        </div>
+
+        <!-- Movie Details Modal -->
+        <div id="detailsModal" class="modal">
+          <div class="modal-content">
+            <button class="close-btn" onclick="closeDetailsModal()">✖</button>
+            <h2>🎬 Movie Details</h2>
+            <div id="movieDetails"></div>
+          </div>
+        </div>
       </div>
 
       <div id="answerContainer">

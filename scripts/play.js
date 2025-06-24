@@ -43,6 +43,8 @@ function showHints() {
     hintsDiv.appendChild(hint);
   }
   hintBtn.disabled = attempt >= game.hints.length - 1;
+  const detailsBtn = document.getElementById("detailsBtn");
+  detailsBtn.disabled = attempt < 4;
 }
 
 function revealNextHint() {
@@ -147,7 +149,7 @@ function startCountdown() {
     const now = new Date();
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0); // ⬅️ Midnight
+    tomorrow.setHours(0, 0, 0, 0); 
 
     const diff = tomorrow - now;
 
@@ -208,6 +210,30 @@ function closeModal() {
 }
 
 function goHome() {
-  localStorage.removeItem("selectedDay"); 
-  window.location.replace("index.html"); 
+  localStorage.removeItem("selectedDay");
+  window.location.replace("index.html");
+}
+
+function showDetails() {
+  const detailsBox = document.getElementById("movieDetails");
+  detailsBox.innerHTML = "";
+
+  for (let key in game.details) {
+    const detail = document.createElement("p");
+    detail.innerHTML = `<strong>${key}:</strong> ${game.details[key]}`;
+    detailsBox.appendChild(detail);
+  }
+
+  document.getElementById("detailsModal").style.display = "block";
+}
+
+window.addEventListener("click", function (event) {
+  const detailsModal = document.getElementById("detailsModal");
+  const modalContent = detailsModal.querySelector(".modal-content");
+  if (event.target === detailsModal) {
+    closeDetailsModal();
+  }
+});
+function closeDetailsModal() {
+  document.getElementById("detailsModal").style.display = "none";
 }

@@ -294,8 +294,69 @@ button:disabled {
   color: white;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 421px)and (max-width: 600px) {
   * {
-    transform: scale(1.2);
+    transform: scale(0.95);
+  }
+}
+
+@media screen and (max-width: 421px) {
+  body{
+    padding: 20px 10px;
+  }
+  .day-control button {
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .day-control select {
+    padding: 8px 10px;
+    font-size: 10px;
+    height: 30px;
+  }
+  
+  .input-row button{
+    width: 100% !important;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  #buttonColumn {
+    width: 34.8%;
+    flex-direction: column;
+  }
+
+  #hintBtn {
+    width: 100%;
+    font-size: 14px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px !important;
+  }
+
+  #detailsBtn {
+    width: 100%;
+    font-size: 14px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .input-row input {
+    font-size: 14px;
+    height: 4.5px;
+  }
+
+  .hint{
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 5px !important;
+  }
+
+  #feedback {
+    font-size: 14px;
+    margin: 10px 0;
   }
 }

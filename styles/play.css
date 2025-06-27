@@ -294,11 +294,12 @@ button:disabled {
   color: white;
 }
 
-@media screen and (min-width: 421px)and (max-width: 600px) {
-  * {
-    transform: scale(0.95);
+@media screen and (max-width: 600px) {
+  body {
+    background-color: lightgreen !important;
   }
 }
+
 
 @media screen and (max-width: 421px) {
   #container{

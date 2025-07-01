@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import movieData from '../data/movies.json';
+import { distance } from 'fastest-levenshtein';
+import confetti from 'canvas-confetti';
+
 
 function Play() {
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();
   const formattedDate = new Date(selectedDate).toDateString();
+  const isHardDay = new Date(selectedDate).getDay() === 0; // 0 = Sunday
 
   const [hintsShown, setHintsShown] = useState(1);
   const [guess, setGuess] = useState('');
@@ -24,19 +28,29 @@ function Play() {
   const prevDate = allDates[currentIndex - 1];
   const nextDate = allDates[currentIndex + 1];
 
+  const [feedback, setFeedback] = useState('');
+
+  const yesterdayKey = new Date(new Date(dateKey).getTime() - 86400000).toLocaleDateString('en-CA');
+  const yesterdayResult = localStorage.getItem(`result-${yesterdayKey}`);
 
   if (!movieForDay) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-center text-gray-600 text-xl">
-        No movie set for {formattedDate}. Please choose another day.
-        <div>
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center text-center px-4">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          No movie set for <span className="text-rose-600">{formattedDate}</span>
+        </h2>
+        <p className="text-gray-500 mb-6">
+          Don’t pick future dates, bro you ain't Doctor Strange. 😭
+        </p>
 
-          <Link>
-            <button className=''>Check Other Dates!</button>
-          </Link>
-        </div>
+        <Link to="/calendar">
+          <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition">
+            Check Other Dates
+          </button>
+        </Link>
       </div>
     );
+
   }
 
   const correctAnswer = movieForDay.answer;
@@ -71,23 +85,27 @@ function Play() {
 
   const handleSubmit = () => {
     const cleanGuess = guess.trim().toLowerCase();
-    const cleanAnswer = correctAnswer.toLowerCase();
+    const cleanAnswer = correctAnswer.trim().toLowerCase();
+    const isCloseEnough = distance(cleanGuess, cleanAnswer) <= 3;
 
-    if (hintsShown < hints.length) {
+    if (isCloseEnough) {
+      confetti(); // just fire a quick burst
+      setResult('correct');
+      setShowWinModal(true);
+      localStorage.setItem(`result-${dateKey}`, 'correct');
+    } else if (hintsShown < hints.length) {
+      setFeedback('Wrong guess!');
       setHintsShown(hintsShown + 1);
       setGuess('');
     } else {
-      if (cleanGuess === cleanAnswer) {
-        setResult('correct');
-        setShowWinModal(true);
-        localStorage.setItem(`result-${dateKey}`, 'correct');
-      } else {
-        setResult('wrong');
-        setShowLoseModal(true);
-        localStorage.setItem(`result-${dateKey}`, 'wrong');
-      }
+      setResult('wrong');
+      setShowLoseModal(true);
+      localStorage.setItem(`result-${dateKey}`, 'wrong');
     }
   };
+
+
+
 
   const tryAgain = () => {
     setHintsShown(1);
@@ -108,7 +126,11 @@ function Play() {
       </Link>
 
       <p className="text-sm text-gray-500 mb-6">{formattedDate}</p>
-
+      {isHardDay && (
+        <div className="mb-6 inline-block bg-red-100 text-red-700 font-semibold text-sm px-3 py-1 rounded-full uppercase tracking-wide">
+          💀 Hard Day!
+        </div>
+      )}
       {/* Navigation */}
       <div className="flex gap-3 mb-6">
         <button
@@ -123,8 +145,8 @@ function Play() {
           onClick={() => navigate('/play', { state: { date: prevDate } })}
           disabled={!prevDate}
           className={`px-4 py-2 text-sm rounded transition ${prevDate
-              ? 'bg-rose-600 text-white hover:bg-rose-700'
-              : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+            ? 'bg-rose-600 text-white hover:bg-rose-700'
+            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
             }`}
         >
           ← Previous Day
@@ -135,8 +157,8 @@ function Play() {
           onClick={() => navigate('/play', { state: { date: nextDate } })}
           disabled={!nextDate}
           className={`px-4 py-2 text-sm rounded transition ${nextDate
-              ? 'bg-rose-600 text-white hover:bg-rose-700'
-              : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+            ? 'bg-rose-600 text-white hover:bg-rose-700'
+            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
             }`}
         >
           Next Day →
@@ -154,9 +176,13 @@ function Play() {
             type="text"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit();
+            }}
             placeholder="Enter movie name"
             className="w-full h-12 px-4 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-rose-400"
           />
+
 
           {/* Hints Box */}
           <div className="bg-white shadow-md rounded-lg p-6">
@@ -208,6 +234,9 @@ function Play() {
         </div>
 
       </div>
+      {feedback && (
+        <div className="text-sm text-red-600 font-medium mb-1">{feedback}</div>
+      )}
 
 
       {/* Countdown */}
@@ -220,19 +249,22 @@ function Play() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
             <h2 className="text-xl font-bold text-green-600 mb-4">🎉 Yay! You guessed it!</h2>
+            <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
             <p className="text-gray-700 mb-6">The movie was <strong>{correctAnswer}</strong>.</p>
-            <div className="flex flex-col gap-3">
+            <div className="flex justify-center gap-3 flex-wrap mt-4">
+
+              <button
+                onClick={tryAgain}
+                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+              >
+                Try Again
+              </button>
+
               <button
                 onClick={() => navigate('/calendar')}
                 className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
               >
                 Check Other Dates
-              </button>
-              <button
-                onClick={tryAgain}
-                className="px-4 py-2 border border-gray-400 text-gray-600 rounded hover:bg-gray-100"
-              >
-                Try Again
               </button>
             </div>
           </div>
@@ -244,29 +276,34 @@ function Play() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
             <h2 className="text-xl font-bold text-red-600 mb-4">❌ Game Over!</h2>
+            <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
             <p className="text-gray-700 mb-4">Better luck next time.</p>
             {showAnswer && (
               <p className="text-gray-700 mb-4">
                 The correct answer was <strong>{correctAnswer}</strong>.
               </p>
             )}
-            <div className="flex flex-col gap-3">
-              <button
-                onClick={() => navigate('/calendar')}
-                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
-              >
-                Check Other Dates
-              </button>
+            <div className="flex justify-center gap-3 flex-wrap mt-4">
+              {/* buttons */}
+
               <button
                 onClick={tryAgain}
-                className="px-4 py-2 border border-gray-400 text-gray-600 rounded hover:bg-gray-100"
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
               >
                 Try Again
               </button>
+
+              <button
+                onClick={() => navigate('/calendar')}
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+              >
+                Check Other Dates
+              </button>
+
               {!showAnswer && (
                 <button
                   onClick={() => setShowAnswer(true)}
-                  className="px-4 py-2 text-sm text-blue-600 hover:underline"
+                  className="px-4 py-0 text-sm text-blue-600 hover:underline mb-0 "
                 >
                   Reveal Answer
                 </button>
@@ -274,36 +311,40 @@ function Play() {
             </div>
           </div>
         </div>
-      )}
+      )
+      }
 
       {/* DETAILS Modal */}
-      {showDetails && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={() => setShowDetails(false)}
-        >
+      {
+        showDetails && (
           <div
-            className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={() => setShowDetails(false)}
           >
-            <button
-              onClick={() => setShowDetails(false)}
-              className="absolute top-3 right-4 text-gray-500 text-xl hover:text-gray-700"
+            <div
+              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative"
+              onClick={(e) => e.stopPropagation()}
             >
-              &times;
-            </button>
-            <h2 className="text-lg font-bold text-rose-600 mb-4">Movie Details</h2>
-            <div className="text-sm text-gray-800 space-y-2">
-              <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
-              <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
-              <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>
-              <p><span className="font-semibold">Release Date:</span> {movieForDay.details?.["Release Date"]}</p>
-              <p><span className="font-semibold">IMDB:</span> {movieForDay.details?.IMDB}</p>
+              <button
+                onClick={() => setShowDetails(false)}
+                className="absolute top-3 right-4 text-gray-500 text-xl hover:text-gray-700"
+              >
+                &times;
+              </button>
+              <h2 className="text-lg font-bold text-rose-600 mb-4">Movie Details</h2>
+              <div className="text-sm text-gray-800 space-y-2">
+                <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
+                <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
+                <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>
+                <p><span className="font-semibold">Release Date:</span> {movieForDay.details?.["Release Date"]}</p>
+                <p><span className="font-semibold">IMDB:</span> {movieForDay.details?.IMDB}</p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+
+    </div >
   );
 }
 

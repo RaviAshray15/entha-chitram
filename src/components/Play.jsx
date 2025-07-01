@@ -195,7 +195,7 @@ function Play() {
                   </p>
                   {/* Divider (only on mobile) */}
                   {i < hintsShown - 1 && (
-                    <hr className="border-gray-300 md:hidden" />
+                    <hr className="border-gray-300 md:hidden mt-2 mb-0" />
                   )}
                 </div>
               ))}

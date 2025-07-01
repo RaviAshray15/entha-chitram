@@ -5,11 +5,11 @@ import { useNavigate, Link } from 'react-router-dom';
 
 function getResultForDate(date) {
   const key = date.toLocaleDateString('en-CA');
-  return localStorage.getItem(`result-${key}`); // 'correct' | 'wrong' | null
+  return localStorage.getItem(`result-${key}`);
 }
 
 function CalendarPage() {
-  const launchDate = new Date(2025, 6, 1); // July 1, 2025
+  const launchDate = new Date(2025, 6, 1);
   const today = new Date();
   const isAfterLaunch = today >= launchDate;
   const [selectedDate, setSelectedDate] = useState(isAfterLaunch ? today : null);
@@ -26,7 +26,6 @@ function CalendarPage() {
 
   return (
     <div className="min-h-screen relative flex flex-col font-['Inter'] bg-gray-100 px-4 sm:px-6 md:px-10 text-gray-800">
-      {/* Font + Styles */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');

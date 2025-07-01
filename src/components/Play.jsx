@@ -187,15 +187,21 @@ function Play() {
           {/* Hints Box */}
           <div className="bg-white shadow-md rounded-lg p-6">
             <h2 className="text-lg font-semibold mb-3">Hints</h2>
-            <div className="text-sm text-gray-700 space-y-2 mb-1">
+            <div className="text-sm text-gray-700 space-y-4">
               {hints.slice(0, hintsShown).map((hint, i) => (
-                <p key={i}>
-                  <span className="font-semibold">Hint {i + 1}:</span> {hint}
-                </p>
+                <div key={i}>
+                  <p className="py-1">
+                    <span className="font-semibold">Hint {i + 1}:</span> {hint}
+                  </p>
+                  {/* Divider (only on mobile) */}
+                  {i < hintsShown - 1 && (
+                    <hr className="border-gray-300 md:hidden" />
+                  )}
+                </div>
               ))}
             </div>
-
           </div>
+
         </div>
 
         {/* Right side: Buttons */}

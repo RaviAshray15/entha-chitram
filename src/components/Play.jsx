@@ -218,7 +218,7 @@ function Play() {
           <button
             onClick={() => setHintsShown(hintsShown + 1)}
             disabled={hintsShown >= hints.length}
-            className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
+            className={`h-12 mt-1 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
               ? 'bg-gray-300 cursor-not-allowed'
               : 'bg-rose-600 hover:bg-rose-700'
               }`}

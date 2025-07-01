@@ -109,7 +109,7 @@ function Home() {
         </h2>
         <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-xl">
           Every day, guess a mystery Telugu movie using the clues. <br />
-          <br />
+          Guess by using as few hints as possible<br />
           But, Hey! Don't google it! Ok?😂
         </p>
         <Link to="/calendar">

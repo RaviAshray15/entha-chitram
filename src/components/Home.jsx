@@ -39,79 +39,72 @@ function Home() {
     'Privacy Policy': (
       <>
         <strong>Data Collection:</strong><br />
-        We do not collect any personal identifiable information (PII) such as your name, email, or phone number. <br /><br />
+        We don’t collect any personal identifiable information (PII).<br /><br />
         <strong>Local Storage:</strong><br />
-        Used only to save your game progress and streaks on your device. <br /><br />
-        <strong>Cookies & Analytics:</strong><br />
-        This site does not use cookies or any tracking/analytics tools. <br /><br />
-        <strong>Third-party Services:</strong><br />
-        We do not share any data with external services or advertisers. <br /><br />
+        Used only to save your game progress on your device.<br /><br />
+        <strong>No Cookies:</strong><br />
+        This site doesn’t use cookies or tracking tools.<br /><br />
         <strong>Children’s Privacy:</strong><br />
-        This game is safe for all ages and does not request any personal data. <br /><br />
-        If you have any concerns, feel free to <a href='mailto:raviashray15@gmail.com' className='text-rose-600 hover:underline'>contact us.</a>
+        This game is safe for all ages.<br /><br />
+        Contact us: <a href='mailto:raviashray15@gmail.com' className='text-rose-600 hover:underline'>raviashray15@gmail.com</a>
       </>
     ),
     'Terms of Use': (
       <>
         <strong>Acceptable Use:</strong><br />
-        Use this game only for personal and non-commercial purposes. <br />
-        Do not attempt to hack, disrupt, or exploit the game. <br />
-        Respect all users — avoid harmful, offensive, or abusive behavior. <br /><br />
+        Use for personal, non-commercial fun.<br />
+        Don’t hack, disrupt, or exploit the game.<br /><br />
         <strong>Liability:</strong><br />
-        The game is provided “as is” without warranties of any kind. <br />
-        We are not liable for any damages resulting from using the game. <br /><br />
+        Provided “as is”. No warranties.<br /><br />
         <strong>Changes:</strong><br />
-        Terms may be updated at any time without prior notice.
+        Terms may change at any time.
       </>
     ),
     'Disclaimer': (
       <>
-        Entha Chitram! is a fan-made project created for entertainment and educational purposes. <br /><br />
-        We are not affiliated with any film production companies or streaming platforms. <br /><br />
-        All movie references are used under fair use as part of a guessing game. <br /><br />
-        This project was inspired by <a href='https://kodle.in' className='text-rose-600 hover:underline'>Kodle.in</a> to celebrate Telugu movie culture.
+        Entha Chitram! is a fan-made game for fun & learning.<br /><br />
+        Not affiliated with film companies or platforms.<br />
+        All movie hints fall under fair use.<br /><br />
+        Inspired by <a href="https://kodle.in" className="text-rose-600 hover:underline">Kodle.in</a> for Telugu movie fans.
       </>
     ),
     'About Us': (
       <>
-        We are a team of Telugu movie fans who wanted to create a fun daily game. <br /><br />
-        This is a tribute to the joy of classic and modern Tollywood films. <br /><br />
-        Our goal is to bring the community together through daily movie challenges.
+        A small team of Telugu movie lovers!<br /><br />
+        Built with love for Tollywood culture.<br />
+        Let’s celebrate movies, one guess at a time.
       </>
     ),
     'Contact': (
       <>
-        <strong>Contact Us:</strong><br />
-        Have feedback, questions, or ideas? <br /><br />
-        Email us at: <a href="mailto:raviashray15@gmail.com" className="text-rose-600 underline">raviashray15@gmail.com</a>
+        Got feedback or ideas?<br /><br />
+        Email us: <a href="mailto:raviashray15@gmail.com" className="text-rose-600 underline">raviashray15@gmail.com</a>
       </>
     )
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-['Inter'] bg-gray-100 px-4 relative">
-      {/* Font import */}
-      <style>
-        {`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-          ::selection {
-            background-color: #e11d48;
-            color: white;
-          }`}
-      </style>
+    <div className="min-h-screen flex flex-col bg-gray-100 px-4 sm:px-6 md:px-8 py-6 font-['Inter'] text-gray-800 relative">
+      {/* Font & Selection */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        ::selection { background-color: #e11d48; color: white; }
+      `}</style>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-center items-center text-center transition-all duration-300 ease-out">
-        <h1 className="text-[clamp(2rem,5vw,3rem)] font-extrabold text-rose-600">
+      <main className="flex-1 flex flex-col justify-center items-center text-center">
+        <h1 className="text-[clamp(2rem,8vw,3rem)] font-extrabold text-rose-600">
           Entha Chitram
         </h1>
-        <h2 className="text-[clamp(1.1rem,2.5vw,1.25rem)] text-gray-600 mt-2">
+        <h2 className="text-[clamp(1.1rem,5vw,1.25rem)] text-gray-600 mt-2">
           A Daily Telugu Movie Guessing Game
         </h2>
-        <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-xl">
-          Every day, guess a mystery Telugu movie using the clues. <br />
-          Guess by using as few hints as possible<br />
-          But, Hey! Don't google it! Ok?😂
+        <p className="text-base sm:text-[15px] text-gray-600 leading-relaxed mt-4 max-w-xl px-2">
+          Every day, guess a mystery Telugu movie using clues. <br />
+          Try using as few hints as possible. <br />
+          But hey — no Googling it, ok? 😂
         </p>
+
         <Link to="/calendar">
           <button className="mt-8 px-8 py-3 text-white text-base font-medium rounded-lg bg-rose-600 hover:bg-rose-700 transition duration-200">
             Play Now
@@ -120,19 +113,19 @@ function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-sm text-gray-500 pb-16">
+      <footer className="text-center text-sm text-gray-500 mt-12 pb-20">
         <p className="mb-1">© 2025 Entha Chitram</p>
-        <div className="space-x-1 flex flex-wrap justify-center">
+        <div className="space-x-1 flex flex-wrap justify-center gap-2">
           {footerLinks.map((text, i) => (
             <span key={text}>
               <button
                 onClick={() => setModalType(text)}
-                className="text-rose-600 transition underline-offset-2 hover:underline"
+                className="text-rose-600 underline-offset-2 hover:underline transition"
               >
                 {text}
               </button>
               {i < footerLinks.length - 1 && (
-                <span className="mx-1 text-gray-400">•</span>
+                <span className="mx-1 text-gray-400 hidden sm:inline">•</span>
               )}
             </span>
           ))}
@@ -141,15 +134,15 @@ function Home() {
 
       {/* Modal */}
       {modalType && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition duration-300 ease-out">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <div
             ref={modalRef}
-            className="bg-white max-w-lg w-full rounded-lg p-6 shadow-xl text-left relative font-normal text-sm animate-fade-in"
+            className="bg-white max-w-md w-full mx-4 rounded-lg p-6 shadow-xl text-left relative text-sm animate-fade-in max-h-[80vh] overflow-y-auto"
           >
             <h2 className="text-lg font-semibold text-rose-600 mb-3">
               {modalType}
             </h2>
-            <div className="text-gray-700 leading-relaxed max-h-[60vh] overflow-y-auto pr-2 whitespace-pre-line">
+            <div className="text-gray-700 leading-relaxed whitespace-pre-line">
               {modalContent[modalType]}
             </div>
             <button
@@ -163,18 +156,16 @@ function Home() {
         </div>
       )}
 
-      {/* Tailwind animation */}
-      <style>
-        {`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.96); }
-            to { opacity: 1; transform: scale(1); }
-          }
-          .animate-fade-in {
-            animation: fadeIn 0.35s ease-out;
-          }
-        `}
-      </style>
+      {/* Animations */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.96); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.35s ease-out;
+        }
+      `}</style>
     </div>
   );
 }

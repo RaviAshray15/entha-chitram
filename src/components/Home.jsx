@@ -15,7 +15,6 @@ function Home() {
 
   const closeModal = () => setModalType(null);
 
-  // Escape key listener
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') closeModal();
@@ -24,7 +23,6 @@ function Home() {
     return () => document.removeEventListener('keydown', handleEsc);
   }, []);
 
-  // Click outside modal
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {

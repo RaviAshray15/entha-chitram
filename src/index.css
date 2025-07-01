@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+::selection {
+  background-color: rgb(225, 29, 72); /* rose-600 */
+  color: white;
+}
+
+button::selection{
+  background-color: transparent; /* rose-700 */
+  color: white;
+}

@@ -32,6 +32,9 @@ function Play() {
 
   const yesterdayKey = new Date(new Date(dateKey).getTime() - 86400000).toLocaleDateString('en-CA');
   const yesterdayResult = localStorage.getItem(`result-${yesterdayKey}`);
+  const winSound = new Audio('/sounds/win.mp3');
+  const loseSound = new Audio('/sounds/lose.mp3');
+
 
   if (!movieForDay) {
     return (
@@ -89,7 +92,8 @@ function Play() {
     const isCloseEnough = distance(cleanGuess, cleanAnswer) <= 3;
 
     if (isCloseEnough) {
-      confetti(); // just fire a quick burst
+      winSound.play();
+      confetti();
       setResult('correct');
       setShowWinModal(true);
       localStorage.setItem(`result-${dateKey}`, 'correct');
@@ -98,6 +102,7 @@ function Play() {
       setHintsShown(hintsShown + 1);
       setGuess('');
     } else {
+      loseSound.play();
       setResult('wrong');
       setShowLoseModal(true);
       localStorage.setItem(`result-${dateKey}`, 'wrong');
@@ -256,7 +261,12 @@ function Play() {
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
             <h2 className="text-xl font-bold text-green-600 mb-4">🎉 Yay! You guessed it!</h2>
             <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
-            <p className="text-gray-700 mb-6">The movie was <strong>{correctAnswer}</strong>.</p>
+            <p className="text-gray-700 mb-2">The movie was <strong>{correctAnswer}</strong>.</p>
+            {movieForDay.details?.Trivia && (
+              <p className="text-sm text-gray-500 mt-0">
+                🧠 Trivia: {movieForDay.details.Trivia}
+              </p>
+            )}
             <div className="flex justify-center gap-3 flex-wrap mt-4">
 
               <button

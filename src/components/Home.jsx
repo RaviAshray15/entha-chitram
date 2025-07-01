@@ -109,8 +109,8 @@ function Home() {
         </h2>
         <p className="text-base text-gray-600 leading-relaxed mt-4 max-w-xl">
           Every day, guess a mystery Telugu movie using the clues. <br />
-          One chance per day — no retries! <br />
-          But... Hey! Don't google it! 😂
+          <br />
+          But, Hey! Don't google it! Ok?😂
         </p>
         <Link to="/calendar">
           <button className="mt-8 px-8 py-3 text-white text-base font-medium rounded-lg bg-rose-600 hover:bg-rose-700 transition duration-200">

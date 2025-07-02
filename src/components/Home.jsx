@@ -2,6 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  useEffect(() => {
+    if (window.history.length > 1) {
+      window.history.pushState(null, '', window.location.href);
+      window.history.go(-(window.history.length - 2));
+    }
+  }, []);
+
   const [modalType, setModalType] = useState(null);
   const modalRef = useRef();
 

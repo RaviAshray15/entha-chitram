@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link, replace } from 'react-router-dom';
 import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
@@ -7,7 +7,7 @@ import confetti from 'canvas-confetti';
 
 function Play() {
   const goBack = () => { navigate(-1); };
-  const goHome = () => { navigate(-2); };
+  const goHome = () => { navigate(window.location.replace('/'))};
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();

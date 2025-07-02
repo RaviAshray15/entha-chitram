@@ -6,6 +6,8 @@ import confetti from 'canvas-confetti';
 
 
 function Play() {
+  const goBack = () => {navigate(-1); };
+  const goHome= () => {navigate(-2); };
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();
@@ -46,11 +48,11 @@ function Play() {
           Don’t pick future dates, bro you ain't Doctor Strange. 😭
         </p>
 
-        <Link to="/calendar">
-          <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition">
+        
+          <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition" onClick={goBack}>
             Check Other Dates
           </button>
-        </Link>
+        
       </div>
     );
 
@@ -126,9 +128,7 @@ function Play() {
     <div className="min-h-screen bg-gray-100 text-gray-800 font-['Inter'] px-4 py-10 flex flex-col items-center">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
-      <Link to="/">
-        <h1 className="text-3xl font-bold text-rose-600 mb-2">Entha Chitram</h1>
-      </Link>
+        <button className="text-3xl font-bold text-rose-600 mb-2 " onClick={goHome}>Entha Chitram</button>
 
       <p className="text-sm text-gray-500 mb-6">{formattedDate}</p>
       {isHardDay && (
@@ -139,7 +139,7 @@ function Play() {
       {/* Navigation */}
       <div className="flex gap-3 mb-6">
         <button
-          onClick={() => navigate('/calendar')}
+          onClick={goBack}
           className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition"
         >
           Other Days
@@ -277,7 +277,7 @@ function Play() {
               </button>
 
               <button
-                onClick={() => navigate('/calendar')}
+                onClick={goBack}
                 className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
               >
                 Check Other Dates
@@ -310,7 +310,7 @@ function Play() {
               </button>
 
               <button
-                onClick={() => navigate('/calendar')}
+                onClick={goBack}
                 className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
               >
                 Check Other Dates

@@ -246,18 +246,18 @@ function Play() {
 
       </div>
       {feedback && (
-        <div className="text-sm text-red-600 font-medium mb-1">{feedback}</div>
+        <div className="text-sm text-red-600 font-medium mb-1 opacity-0 animate-fadeIn">{feedback}</div>
       )}
 
 
       {/* Countdown */}
-      <div className="mt-2 text-sm text-gray-600">
+      <div className="mt-2 text-sm text-gray-600 ">
         ⏰ Next movie in: <span className="font-semibold">{timeLeft}</span>
       </div>
 
       {/* WIN Modal */}
       {showWinModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
             <h2 className="text-xl font-bold text-green-600 mb-4">🎉 Yay! You guessed it!</h2>
             <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
@@ -289,13 +289,13 @@ function Play() {
 
       {/* LOSE Modal */}
       {showLoseModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-50 animate-fadeIn">
           <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
             <h2 className="text-xl font-bold text-red-600 mb-4">❌ Game Over!</h2>
             <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
             <p className="text-gray-700 mb-4">Better luck next time.</p>
             {showAnswer && (
-              <p className="text-gray-700 mb-4">
+              <p className="text-gray-700 mb-4 opacity-0 animate-fadeIn">
                 The correct answer was <strong>{correctAnswer}</strong>.
               </p>
             )}
@@ -334,16 +334,16 @@ function Play() {
       {
         showDetails && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn"
             onClick={() => setShowDetails(false)}
           >
             <div
-              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative"
+              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative opacity-0 animate-fadeIn"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowDetails(false)}
-                className="absolute top-3 right-4 text-gray-500 text-xl hover:text-gray-700"
+                className="absolute top-3 right-4 text-gray-500 text-xl hover:text-gray-700 opacity-0 animate-fadeIn"
               >
                 &times;
               </button>

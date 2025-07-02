@@ -26,6 +26,6 @@ button::selection {
   }
 
   .animate-fadeIn {
-    animation: fadeIn 0.5s ease-out both;
+    animation: fadeIn 1s ease both;
   }
 }

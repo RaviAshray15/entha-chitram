@@ -6,8 +6,8 @@ import confetti from 'canvas-confetti';
 
 
 function Play() {
-  const goBack = () => {navigate(-1); };
-  const goHome= () => {navigate(-2); };
+  const goBack = () => { navigate(-1); };
+  const goHome = () => { navigate(-2); };
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();
@@ -48,11 +48,11 @@ function Play() {
           Don’t pick future dates, bro you ain't Doctor Strange. 😭
         </p>
 
-        
-          <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition" onClick={goBack}>
-            Check Other Dates
-          </button>
-        
+
+        <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition" onClick={goBack}>
+          Check Other Dates
+        </button>
+
       </div>
     );
 
@@ -128,7 +128,7 @@ function Play() {
     <div className="min-h-screen bg-gray-100 text-gray-800 font-['Inter'] px-4 py-10 flex flex-col items-center">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
-        <button className="text-3xl font-bold text-rose-600 mb-2 " onClick={goHome}>Entha Chitram</button>
+      <button className="text-3xl font-bold text-rose-600 mb-2 " onClick={goHome}>Entha Chitram</button>
 
       <p className="text-sm text-gray-500 mb-6">{formattedDate}</p>
       {isHardDay && (
@@ -194,15 +194,15 @@ function Play() {
             <h2 className="text-lg font-semibold mb-3">Hints</h2>
             <div className="text-sm text-gray-700 space-y-4">
               {hints.slice(0, hintsShown).map((hint, i) => (
-                <div key={i}>
+                <div key={i} className="opacity-0 animate-fadeIn">
                   <p className="py-1">
                     <span className="font-semibold">Hint {i + 1}:</span> {hint}
                   </p>
-                  {/* Divider (only on mobile) */}
                   {i < hintsShown - 1 && (
                     <hr className="border-gray-300 md:hidden mt-2 mb-0" />
                   )}
                 </div>
+
               ))}
             </div>
           </div>

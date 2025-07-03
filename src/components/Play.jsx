@@ -1,12 +1,8 @@
-
-
-
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
-import DarkMode from './DarkMode';
 
 function Play({ darkMode, setDarkMode }) {
   const goBack = () => { navigate(-1); };
@@ -116,17 +112,8 @@ function Play({ darkMode, setDarkMode }) {
   const hints = movieForDay.hints;
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-['Inter'] px-4 py-10 flex flex-col items-center">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-['Inter'] px-4 py-10 pb-96 flex flex-col items-center">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
-
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={() => setDarkMode(prev => !prev)}
-          className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-[20px] leading-none"
-        >
-          {darkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
 
       <button className="text-3xl font-bold text-rose-600 dark:text-rose-500 mb-2" onClick={goHome}>Entha Chitram</button>
 
@@ -170,7 +157,6 @@ function Play({ darkMode, setDarkMode }) {
           Next Day →
         </button>
       </div>
-
 
       {/* Game Box: Input + Hint + Buttons */}
       <div className="w-full max-w-2xl flex gap-4 mb-8 justify-center">
@@ -316,21 +302,21 @@ function Play({ darkMode, setDarkMode }) {
       {/* DETAILS Modal */}
       {showDetails && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
           onClick={() => setShowDetails(false)}
         >
           <div
-            className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative opacity-0 animate-fadeIn"
+            className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setShowDetails(false)}
-              className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl hover:text-gray-700 dark:hover:text-white opacity-0 animate-fadeIn"
+              className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl hover:text-gray-700 dark:hover:text-white"
             >
               &times;
             </button>
-            <h2 className="text-lg font-bold text-rose-600 dark:text-rose-400 mb-4">Movie Details</h2>
-            <div className="text-sm text-gray-800 dark:text-gray-200 space-y-2">
+            <h2 className="text-base font-bold text-rose-600 dark:text-rose-400 mb-4 text-center">Movie Details</h2>
+            <div className="text-base text-gray-800 dark:text-gray-200 space-y-2 text-center">
               <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
               <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
               <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>

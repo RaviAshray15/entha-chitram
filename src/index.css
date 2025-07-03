@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden; /* <== prevent scroll */
+  height: 100%;
+}
+
 ::selection {
   background-color: rgb(225, 29, 72); /* rose-600 */
   color: white;
@@ -26,5 +35,20 @@
 
   .animate-fadeIn {
     animation: fadeIn 1s ease both;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 0.4s ease-in forwards;
   }
 }

@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
-import DarkMode from './DarkMode';
 
 function Home({ darkMode, setDarkMode }) {
   useEffect(() => {
@@ -102,9 +101,6 @@ function Home({ darkMode, setDarkMode }) {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         ::selection { background-color: #e11d48; color: white; }
       `}</style>
-
-      {/* Dark Mode Toggle Button */}
-      <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
 
 
       {/* Main Content */}

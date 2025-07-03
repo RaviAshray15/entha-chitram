@@ -1,18 +1,21 @@
+
+
+
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate, Link, replace } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
+import DarkMode from './DarkMode';
 
-
-function Play() {
+function Play({ darkMode, setDarkMode }) {
   const goBack = () => { navigate(-1); };
-  const goHome = () => { navigate(window.location.replace('/'))};
+  const goHome = () => { navigate('/') };
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();
   const formattedDate = new Date(selectedDate).toDateString();
-  const isHardDay = new Date(selectedDate).getDay() === 0; // 0 = Sunday
+  const isHardDay = new Date(selectedDate).getDay() === 0;
 
   const [hintsShown, setHintsShown] = useState(1);
   const [guess, setGuess] = useState('');
@@ -25,41 +28,14 @@ function Play() {
 
   const dateKey = new Date(selectedDate).toLocaleDateString('en-CA');
   const movieForDay = movieData[dateKey];
-  const allDates = Object.keys(movieData).sort(); // sorted date keys
+  const allDates = Object.keys(movieData).sort();
   const currentIndex = allDates.indexOf(dateKey);
   const prevDate = allDates[currentIndex - 1];
   const nextDate = allDates[currentIndex + 1];
-
   const [feedback, setFeedback] = useState('');
 
-  const yesterdayKey = new Date(new Date(dateKey).getTime() - 86400000).toLocaleDateString('en-CA');
-  const yesterdayResult = localStorage.getItem(`result-${yesterdayKey}`);
   const winSound = new Audio('/sounds/win.mp3');
   const loseSound = new Audio('/sounds/lose.mp3');
-
-
-  if (!movieForDay) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center text-center px-4">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-          No movie set for <span className="text-rose-600">{formattedDate}</span>
-        </h2>
-        <p className="text-gray-500 mb-6">
-          Don’t pick future dates, bro you ain't Doctor Strange. 😭
-        </p>
-
-
-        <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition" onClick={goBack}>
-          Check Other Dates
-        </button>
-
-      </div>
-    );
-
-  }
-
-  const correctAnswer = movieForDay.answer;
-  const hints = movieForDay.hints;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,9 +56,7 @@ function Play() {
 
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        setShowDetails(false);
-      }
+      if (e.key === 'Escape') setShowDetails(false);
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
@@ -111,9 +85,6 @@ function Play() {
     }
   };
 
-
-
-
   const tryAgain = () => {
     setHintsShown(1);
     setGuess('');
@@ -124,23 +95,53 @@ function Play() {
     setShowDetails(false);
   };
 
+  if (!movieForDay) {
+    return (
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-center px-4 flex flex-col justify-center items-center">
+        <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
+        <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-100 mb-4">
+          No movie set for <span className="text-rose-600 dark:text-rose-400">{formattedDate}</span>
+        </h2>
+        <p className="text-gray-500 dark:text-gray-400 mb-6">
+          Don’t pick future dates, bro you ain't Doctor Strange. 😭
+        </p>
+        <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition dark:hover:bg-rose-500" onClick={goBack}>
+          Check Other Dates
+        </button>
+      </div>
+    );
+  }
+
+  const correctAnswer = movieForDay.answer;
+  const hints = movieForDay.hints;
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800 font-['Inter'] px-4 py-10 flex flex-col items-center">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-['Inter'] px-4 py-10 flex flex-col items-center">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
-      <button className="text-3xl font-bold text-rose-600 mb-2 " onClick={goHome}>Entha Chitram</button>
+      <div className="absolute top-4 right-4">
+        <button
+          onClick={() => setDarkMode(prev => !prev)}
+          className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-[20px] leading-none"
+        >
+          {darkMode ? '☀️' : '🌙'}
+        </button>
+      </div>
 
-      <p className="text-sm text-gray-500 mb-6">{formattedDate}</p>
+      <button className="text-3xl font-bold text-rose-600 dark:text-rose-500 mb-2" onClick={goHome}>Entha Chitram</button>
+
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{formattedDate}</p>
       {isHardDay && (
-        <div className="mb-6 inline-block bg-red-100 text-red-700 font-semibold text-sm px-3 py-1 rounded-full uppercase tracking-wide">
+        <div className="mb-6 inline-block bg-red-100 text-red-700 font-semibold text-sm px-3 py-1 rounded-full uppercase tracking-wide dark:bg-red-900 dark:text-red-300">
           💀 Hard Day!
         </div>
       )}
+
       {/* Navigation */}
       <div className="flex gap-3 mb-6">
         <button
           onClick={goBack}
-          className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition"
+          className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition dark:hover:bg-rose-500"
         >
           Other Days
         </button>
@@ -150,8 +151,8 @@ function Play() {
           onClick={() => navigate('/play', { state: { date: prevDate } })}
           disabled={!prevDate}
           className={`px-4 py-2 text-sm rounded transition ${prevDate
-            ? 'bg-rose-600 text-white hover:bg-rose-700'
-            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+            ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500'
+            : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
             }`}
         >
           ← Previous Day
@@ -162,8 +163,8 @@ function Play() {
           onClick={() => navigate('/play', { state: { date: nextDate } })}
           disabled={!nextDate}
           className={`px-4 py-2 text-sm rounded transition ${nextDate
-            ? 'bg-rose-600 text-white hover:bg-rose-700'
-            : 'bg-gray-300 text-gray-600 cursor-not-allowed'
+            ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500'
+            : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
             }`}
         >
           Next Day →
@@ -172,11 +173,9 @@ function Play() {
 
 
       {/* Game Box: Input + Hint + Buttons */}
-      {/* Game Section: Input, Hints, and Buttons side-by-side */}
       <div className="w-full max-w-2xl flex gap-4 mb-8 justify-center">
         {/* Left side: Input + Hints */}
         <div className="flex-1 space-y-4">
-          {/* Input */}
           <input
             type="text"
             value={guess}
@@ -185,100 +184,89 @@ function Play() {
               if (e.key === 'Enter') handleSubmit();
             }}
             placeholder="Enter movie name"
-            className="w-full h-12 px-4 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-rose-400"
+            className="w-full h-12 px-4 border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white"
           />
 
-
-          {/* Hints Box */}
-          <div className="bg-white shadow-md rounded-lg p-6">
+          <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
             <h2 className="text-lg font-semibold mb-3">Hints</h2>
-            <div className="text-sm text-gray-700 space-y-4">
+            <div className="text-sm text-gray-700 dark:text-gray-300 space-y-4">
               {hints.slice(0, hintsShown).map((hint, i) => (
                 <div key={i} className="opacity-0 animate-fadeIn">
                   <p className="py-1">
                     <span className="font-semibold">Hint {i + 1}:</span> {hint}
                   </p>
                   {i < hintsShown - 1 && (
-                    <hr className="border-gray-300 md:hidden mt-2 mb-0" />
+                    <hr className="border-gray-300 dark:border-gray-600 md:hidden mt-2 mb-0" />
                   )}
                 </div>
-
               ))}
             </div>
           </div>
-
         </div>
 
         {/* Right side: Buttons */}
         <div className="w-32 flex flex-col gap-3">
-          {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="h-12 w-full bg-rose-600 text-white rounded-md text-sm font-semibold hover:bg-rose-700 transition"
+            className="h-12 w-full bg-rose-600 text-white rounded-md text-sm font-semibold hover:bg-rose-700 dark:hover:bg-rose-500 transition"
           >
             Submit
           </button>
 
-          {/* Show Hint */}
           <button
             onClick={() => setHintsShown(hintsShown + 1)}
             disabled={hintsShown >= hints.length}
             className={`h-12 mt-1 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-rose-600 hover:bg-rose-700'
+              ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+              : 'bg-rose-600 hover:bg-rose-700 dark:hover:bg-rose-500'
               }`}
           >
             Show Hint
           </button>
 
-          {/* Show Details */}
           <button
             onClick={() => setShowDetails(true)}
             disabled={hintsShown < hints.length}
             className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown < hints.length
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700'
+              ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500'
               }`}
           >
             Show Details
           </button>
         </div>
-
       </div>
+
       {feedback && (
-        <div className="text-sm text-red-600 font-medium mb-1 opacity-0 animate-fadeIn">{feedback}</div>
+        <div className="text-sm text-red-600 dark:text-red-400 font-medium mb-1 opacity-0 animate-fadeIn">{feedback}</div>
       )}
 
-
-      {/* Countdown */}
-      <div className="mt-2 text-sm text-gray-600 ">
+      <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
         ⏰ Next movie in: <span className="font-semibold">{timeLeft}</span>
       </div>
 
       {/* WIN Modal */}
       {showWinModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
-            <h2 className="text-xl font-bold text-green-600 mb-4">🎉 Yay! You guessed it!</h2>
-            <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
-            <p className="text-gray-700 mb-2">The movie was <strong>{correctAnswer}</strong>.</p>
+          <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
+            <h2 className="text-xl font-bold text-green-600 dark:text-green-400 mb-4">🎉 Yay! You guessed it!</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
+            <p className="text-gray-700 dark:text-gray-200 mb-2">The movie was <strong>{correctAnswer}</strong>.</p>
             {movieForDay.details?.Trivia && (
-              <p className="text-sm text-gray-500 mt-0">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0">
                 🧠 Trivia: {movieForDay.details.Trivia}
               </p>
             )}
             <div className="flex justify-center gap-3 flex-wrap mt-4">
-
               <button
                 onClick={tryAgain}
-                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
               >
                 Try Again
               </button>
-
               <button
                 onClick={goBack}
-                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
               >
                 Check Other Dates
               </button>
@@ -290,36 +278,32 @@ function Play() {
       {/* LOSE Modal */}
       {showLoseModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-50 animate-fadeIn">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
-            <h2 className="text-xl font-bold text-red-600 mb-4">❌ Game Over!</h2>
-            <p className="text-sm text-gray-500 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
-            <p className="text-gray-700 mb-4">Better luck next time.</p>
+          <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
+            <h2 className="text-xl font-bold text-red-600 dark:text-red-400 mb-4">❌ Game Over!</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">📅 Selected Date: <span className="font-medium">{formattedDate}</span></p>
+            <p className="text-gray-700 dark:text-gray-200 mb-4">Better luck next time.</p>
             {showAnswer && (
-              <p className="text-gray-700 mb-4 opacity-0 animate-fadeIn">
+              <p className="text-gray-700 dark:text-gray-200 mb-4 opacity-0 animate-fadeIn">
                 The correct answer was <strong>{correctAnswer}</strong>.
               </p>
             )}
             <div className="flex justify-center gap-3 flex-wrap mt-4">
-              {/* buttons */}
-
               <button
                 onClick={tryAgain}
-                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
               >
                 Try Again
               </button>
-
               <button
                 onClick={goBack}
-                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700"
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
               >
                 Check Other Dates
               </button>
-
               {!showAnswer && (
                 <button
                   onClick={() => setShowAnswer(true)}
-                  className="px-4 py-0 text-sm text-blue-600 hover:underline mb-0 "
+                  className="px-4 py-0 text-sm text-blue-600 dark:text-blue-400 hover:underline mb-0 "
                 >
                   Reveal Answer
                 </button>
@@ -327,40 +311,37 @@ function Play() {
             </div>
           </div>
         </div>
-      )
-      }
+      )}
 
       {/* DETAILS Modal */}
-      {
-        showDetails && (
+      {showDetails && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn"
+          onClick={() => setShowDetails(false)}
+        >
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn"
-            onClick={() => setShowDetails(false)}
+            className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative opacity-0 animate-fadeIn"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div
-              className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm text-left relative opacity-0 animate-fadeIn"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              onClick={() => setShowDetails(false)}
+              className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl hover:text-gray-700 dark:hover:text-white opacity-0 animate-fadeIn"
             >
-              <button
-                onClick={() => setShowDetails(false)}
-                className="absolute top-3 right-4 text-gray-500 text-xl hover:text-gray-700 opacity-0 animate-fadeIn"
-              >
-                &times;
-              </button>
-              <h2 className="text-lg font-bold text-rose-600 mb-4">Movie Details</h2>
-              <div className="text-sm text-gray-800 space-y-2">
-                <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
-                <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
-                <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>
-                <p><span className="font-semibold">Release Date:</span> {movieForDay.details?.["Release Date"]}</p>
-                <p><span className="font-semibold">IMDB:</span> {movieForDay.details?.IMDB}</p>
-              </div>
+              &times;
+            </button>
+            <h2 className="text-lg font-bold text-rose-600 dark:text-rose-400 mb-4">Movie Details</h2>
+            <div className="text-sm text-gray-800 dark:text-gray-200 space-y-2">
+              <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
+              <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
+              <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>
+              <p><span className="font-semibold">Release Date:</span> {movieForDay.details?.["Release Date"]}</p>
+              <p><span className="font-semibold">IMDB:</span> {movieForDay.details?.IMDB}</p>
             </div>
           </div>
-        )
-      }
+        </div>
+      )}
 
-    </div >
+    </div>
   );
 }
 

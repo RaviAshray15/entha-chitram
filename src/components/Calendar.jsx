@@ -189,7 +189,7 @@ function CalendarPage({ darkMode, setDarkMode }) {
             tileClassName={({ date, view }) => {
               if (view !== 'month') return null;
               const result = getResultForDate(date);
-              if (result === 'correct') return 'bg-green-200 text-green-500 font-semibold rounded-md dark:bg-green-900/50';
+              if (result === 'correct') return 'bg-green-400 text-green-500 font-semibold rounded-md dark:bg-green-900/50';
               if (result === 'wrong') return 'bg-red-200 text-red-500 font-semibold rounded-md dark:bg-red-900/50';
               return '';
             }}

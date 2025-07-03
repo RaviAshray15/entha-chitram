@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
+import DarkMode from './DarkMode';
 
 function Home({ darkMode, setDarkMode }) {
   useEffect(() => {
@@ -103,14 +104,7 @@ function Home({ darkMode, setDarkMode }) {
       `}</style>
 
       {/* Dark Mode Toggle Button */}
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={() => setDarkMode(prev => !prev)}
-          className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-[20px] leading-none"
-        >
-          {darkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
+      <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
 
 
       {/* Main Content */}

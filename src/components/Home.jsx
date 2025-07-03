@@ -95,7 +95,7 @@ function Home({ darkMode, setDarkMode }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-200 px-4 sm:px-6 md:px-8 py-6 font-['Inter'] text-gray-800 relative dark:bg-gray-900 dark:text-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-100 px-4 sm:px-6 md:px-8 py-6 font-['Inter'] text-gray-800 relative dark:bg-gray-900 dark:text-gray-100">
       {/* Font & Selection */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -115,7 +115,7 @@ function Home({ darkMode, setDarkMode }) {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center items-center text-center">
-        <h1 className="text-[clamp(2rem,8vw,3rem)] font-extrabold text-rose-600 animate-fade-up">
+        <h1 className="text-[clamp(2rem,8vw,3rem)] font-extrabold text-rose-600 animate-fade-up dark:text-rose-500">
           Entha Chitram
         </h1>
         <h2 className="text-[clamp(1.1rem,5vw,1.25rem)] text-gray-600 dark:text-gray-300 mt-2 animate-fadeIn">
@@ -128,21 +128,21 @@ function Home({ darkMode, setDarkMode }) {
         </p>
 
         <Link to="/calendar">
-          <button className="mt-8 px-8 py-3 text-white text-base font-medium rounded-lg bg-rose-600 hover:bg-rose-700 transition duration-200 animate-fadeIn">
+          <button className="button-selection mt-8 px-8 py-3 text-white text-base font-medium rounded-lg bg-rose-600 hover:bg-rose-700 transition duration-200 animate-fadeIn dark:bg-rose-500 dark:hover:bg-rose-600">
             Play Now
           </button>
         </Link>
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-sm text-gray-500 dark:text-gray-400 mt-12 pb-20 animate-fade-up">
+      <footer className="text-center text-sm text-gray-400 dark:text-gray-400 mt-12 pb-20 animate-fade-up">
         <p className="mb-1">© 2025 Entha Chitram</p>
         <div className="space-x-1 flex flex-wrap justify-center gap-2">
           {footerLinks.map((text, i) => (
             <span key={text}>
               <button
                 onClick={() => setModalType(text)}
-                className="text-rose-600 underline-offset-2 hover:underline transition"
+                className="text-rose-600 underline-offset-2 hover:underline transition dark:text-rose-500"
               >
                 {text}
               </button>

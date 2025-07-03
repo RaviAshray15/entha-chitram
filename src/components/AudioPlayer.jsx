@@ -16,7 +16,7 @@ function AudioPlayer({ autoPlay = false }) {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(0.4);
-    const [showPlayer, setShowPlayer] = useState(true); // starts open
+    const [showPlayer, setShowPlayer] = useState(false); 
     const [isFadingOut, setIsFadingOut] = useState(false);
     const audioRef = useRef(null);
 

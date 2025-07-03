@@ -53,22 +53,25 @@
       "Trivia": "The production used an actual retired police constable as a body double for Banerjee’s scenes — to perfect the gait and mannerisms of a real cop."
     }
   },
-  "2025-07-03": {
-    "answer": "Mathu Vadalara",
+  {
+  "2025-07-04": {
+    "answer": "Ee Nagaraniki Emaindi",
     "hints": [
-      "This 2019 dark comedy-thriller revolves around three close friends.",
-      "The hero is a delivery boy struggling with money problems.",
-      "He tries to steal ₹500 from an old lady during a delivery.",
-      "He unexpectedly finds ₹10 lakhs in his delivery bags.",
-      "He gets stuck in a murder and drug case inside an apartment."
+      "This 2018 film follows four childhood friends on a trip to Goa.",
+      "They attempt to make a short film together for a competition.",
+      "The film is a mix of bromance, nostalgia, and comedy.",
+      "It was directed by the same person who made *Pelli Choopulu*.",
+      "The film became a cult favorite among Telugu youth."
     ],
     "details": {
-      "Hero": "Simha Koduri",
-      "Director": "Ritesh Rana",
-      "Music": "Kaala Bhairava",
-      "Release Date": "26 February 2016",
-      "IMDB": "8.2/10",
-      "Trivia": "The production used an actual retired police constable as a body double for Banerjee’s scenes — to perfect the gait and mannerisms of a real cop."
+      "Hero": "Vishwak Sen",
+      "Director": "Tharun Bhascker",
+      "Music": "Vivek Sagar",
+      "Release Date": "29 June 2018",
+      "IMDB": "8.0/10",
+      "Trivia": "Many dialogues from this film became viral memes and it's still widely quoted among Gen Z Telugu audiences."
     }
   }
+}
+
 }

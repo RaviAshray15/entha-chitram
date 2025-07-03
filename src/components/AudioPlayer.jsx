@@ -3,7 +3,7 @@ import { Pause, Play, SkipBack, SkipForward, Volume2, Music2, X } from 'lucide-r
 import '../index.css';
 
 const playlist = [
-    { title: 'Poyi Raa Mama | Kubera ', src: '/sounds/poyira.mp3' },
+    { title: 'Poyi Raa Mama | Kuberaa ', src: '/sounds/poyira.mp3' },
     { title: 'Mental Madhilo | OK Bangaram', src: '/sounds/mentalmadhilo.mp3' },
     { title: 'Entha Chitram | Ante Sundaraaniki', src: '/sounds/enthachitram.mp3' },
     { title: 'Adhento Gaani Vunnapaatuga | Jersey', src: '/sounds/adhento.mp3' },

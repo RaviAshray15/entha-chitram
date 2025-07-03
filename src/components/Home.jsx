@@ -18,7 +18,7 @@ function Home({ darkMode, setDarkMode }) {
     'Terms of Use',
     'Disclaimer',
     'About Us',
-    'Contact',
+    'Contact Us',
   ];
 
   const closeModal = () => setModalType(null);

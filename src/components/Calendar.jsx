@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate, Link } from 'react-router-dom';
 import '../index.css';
+import DarkMode from './DarkMode';
 
 function getResultForDate(date) {
   const key = date.toLocaleDateString('en-CA');
@@ -139,14 +140,8 @@ function CalendarPage({ darkMode, setDarkMode }) {
       </div>
 
       {/* Dark Mode Toggle */}
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
-        <button
-          onClick={() => setDarkMode(prev => !prev)}
-          className="px-2 py-2 rounded-3xl bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-xl"
-        >
-          {darkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
+      <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
+
 
       {/* Main Content */}
       <main className="flex-1 w-full max-w-xl mx-auto flex flex-col justify-center items-center text-center px-2 sm:px-4 transition-all duration-300 ease-out">

@@ -4,7 +4,7 @@ import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
 
-function Play({ darkMode, setDarkMode }) {
+function Play() {
   const goBack = () => { navigate(-1); };
   const goHome = () => { navigate('/') };
   const location = useLocation();
@@ -94,7 +94,6 @@ function Play({ darkMode, setDarkMode }) {
   if (!movieForDay) {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-center px-4 flex flex-col justify-center items-center">
-        <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
         <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-100 mb-4">
           No movie set for <span className="text-rose-600 dark:text-rose-400">{formattedDate}</span>
         </h2>

@@ -147,7 +147,8 @@ function Home({ darkMode, setDarkMode }) {
                 {text}
               </button>
               {i < footerLinks.length - 1 && (
-                <span className="ml-3 text-gray-400 hidden sm:inline">•</span>
+                <span className="ml-3 text-gray-400">•</span>
+
               )}
             </span>
           ))}

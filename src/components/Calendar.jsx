@@ -30,104 +30,131 @@ function CalendarPage({ darkMode, setDarkMode }) {
     <div className="min-h-screen relative flex flex-col font-['Inter'] bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100 px-4 sm:px-6 md:px-10 transition-colors duration-300">
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-          ::selection {
-            background-color: #e11d48;
-            color: white;
-          }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-          .react-calendar {
-            border: none;
-            font-family: 'Inter', sans-serif;
-            background-color: white;
-            border-radius: 1rem;
-            padding: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            width: 100%;
-          }
+  ::selection {
+    background-color: #e11d48;
+    color: white;
+  }
 
-          .dark .react-calendar {
-            background-color: #1f2937;
-            color: white;
-          }
+  .react-calendar {
+    border: none;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    width: 100%;
+  }
 
-          .react-calendar__tile {
-            padding: 0.75rem 0.5rem;
-            font-size: 0.95rem;
-            border-radius: 8px;
-            transition: all 0.2s ease-in-out;
-          }
+  .dark .react-calendar {
+    background-color: #1e293b; /* slate-800 */
+    color: white;
+  }
 
-          .dark .react-calendar__tile:hover {
-            background-color:rgb(52, 70, 97);
-          }
+  .react-calendar__tile {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out, color 0.2s;
+  }
 
-          .dark .react-calendar__tile:active {
-            background-color:rgb(116, 57, 57);
-          }
+  /* ==== General Hover/Focus/Active ==== */
+  .react-calendar__tile:hover,
+  .react-calendar__tile:focus,
+  .react-calendar__tile:active {
+    background-color: #fda4af; /* rose-300 */
+    color: #7f1d1d; /* rose-900 */
+  }
 
-          .dark .react-calendar__tile:focus {
-            background-color:rgba(203, 59, 59, 0.87);
-          }
+  .dark .react-calendar__tile:hover,
+  .dark .react-calendar__tile:focus,
+  .dark .react-calendar__tile:active {
+    background-color:rgba(225, 29, 71, 0.47);
+    color: white;
+  }
 
-          .react-calendar__tile--now {
-            background: rgb(104, 31, 31);
-            font-weight: bold;
-            color: #b91c1c;
-          }
+  /* ==== Today === */
+  .react-calendar__tile--now {
+    background-color: #fecdd3; /* rose-200 */
+    color: #be123c; /* rose-700 */
+    font-weight: bold;
+  }
 
-          .dark .react-calendar__tile--now {
-            color: #facc15;
-          }
+  .react-calendar__tile--now:hover,
+  .react-calendar__tile--now:focus,
+  .react-calendar__tile--now:active {
+    background-color: #fda4af !important; /* rose-300 */
+    color: #7f1d1d !important; /* rose-900 */
+  }
 
-          .react-calendar__tile--active {
-            background: #e11d48;
-            color: white;
-          }
+  .dark .react-calendar__tile--now {
+    background-color:rgba(177, 55, 82, 0.86); /* rose-900 */
+    color: white; /* rose-300 text */
+    font-weight: bold;
+  }
 
-          .react-calendar__tile:disabled {
-            color: #d1d5db;
-            background: #f9fafb;
-            cursor: not-allowed;
-          }
+  .dark .react-calendar__tile--now:hover,
+  .dark .react-calendar__tile--now:focus,
+  .dark .react-calendar__tile--now:active {
+    background-color: #e11d48 !important;
+    color: white !important;
+  }
 
-          .dark .react-calendar__tile:disabled {
-            color:rgb(70, 80, 94);
-            background:rgb(95, 101, 109);
-            cursor: not-allowed;
-          }
-            /* Fix calendar nav buttons */
-          .react-calendar__navigation button {
-            background: transparent;
-            color: #e11d48;
-            font-size: 1.25rem;
-            font-weight: bold;
-            transition: color 0.2s;
-          }
+  /* ==== Active (selected date) ==== */
+  .react-calendar__tile--active {
+    background-color: #e11d48 !important;
+    color: white !important;
+  }
 
-          .react-calendar__navigation button:hover {
-            background-color:rgba(189, 29, 64, 0.38);
-            border-radius: 8px;
-          }
+  /* ==== Disabled ==== */
+  .react-calendar__tile:disabled {
+    color: #d1d5db;
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+  }
 
-          .react-calendar__navigation. button:hover {
-            background-color:rgba(189, 29, 64, 0.38);
-            border-radius: 8px;
-          }
+  .dark .react-calendar__tile:disabled {
+    color: #9ca3af;
+    background-color: #374151;
+    cursor: not-allowed;
+  }
 
-          .dark .react-calendar__navigation button {
-            color: white;
-            background-color: transparent;
-          }
+  /* ==== Navigation Buttons ==== */
+  .react-calendar__navigation button {
+    background: transparent;
+    color: #e11d48;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 0.25rem 0.5rem;
+    transition: background-color 0.2s ease-in-out;
+  }
 
-          .dark .react-calendar__navigation button:hover {
-            color: #e11d48;
-            background-color:rgba(189, 29, 64, 0.38);
-            border-radius: 8px;
-          }
+  .dark .react-calendar__navigation button {
+    color: white;
+  }
 
-        `}
+  .dark .react-calendar__navigation button:hover,
+  .dark .react-calendar__navigation button:focus {
+    background-color: rgba(225, 29, 72, 0.2); /* rose-600 with opacity */
+    color: #e11d48;
+  }
+    .dark .react-calendar__navigation button:hover,
+.dark .react-calendar__navigation button:focus {
+  background-color: rgba(225, 29, 72, 0.2); /* rose-600 transparent */
+  color: #e11d48;
+}
+
+/* Disable state (when prev month is not available) */
+.react-calendar__navigation button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+}
+`}
       </style>
+
 
       {/* Back Button */}
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6">

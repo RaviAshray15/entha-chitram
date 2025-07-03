@@ -106,7 +106,7 @@ function Home({ darkMode, setDarkMode }) {
       <div className="absolute top-4 right-4">
         <button
           onClick={() => setDarkMode(prev => !prev)}
-          className="px-2 py-2 rounded-3xl bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-xl"
+          className="px-2 py-2 rounded-full bg-gray-700 text-white dark:bg-rose-600 dark:text-black transition-colors duration-200 text-xl"
         >
           {darkMode ? '☀️' : '🌙'}
         </button>

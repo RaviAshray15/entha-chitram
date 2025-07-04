@@ -2,14 +2,13 @@
   "2025-07-01": {
     "answer": "Ante Sundaraniki",
     "hints": [
-      "This 2022 Rom-Com movie revolves around religious boundaries.",
-      "Hero works in an ad agency and Heroine is a professional photographer.",
-      "Both Hero & Heroine come from strict, orthodox families of different religions.",
-      "Both Hero & Heroine tell 2 different lies to convince their families.",
-      "Heroine dreams of having her wedding on Amelia Island."
+      "Hero is a Brahmin guy from a super strict and religious family.",
+      "He falls in love with a Christian girl who works as a photographer.",
+      "Her dream is to settle in the US and have a beach wedding.",
+      "To convince their parents, both of them lie — but not the same lie.",
+      "Their lies lead to confusion, comedy, and chaos in both families."
     ],
     "details": {
-      "Hero": "Natural Star Nani",
       "Director": "Vivek Athreya",
       "Music": "Vivek Sagar",
       "Release Date": "10 June 2022",
@@ -20,37 +19,52 @@
   "2025-07-02": {
     "answer": "Kshanam",
     "hints": [
-      "This 2016 thriller revolves around a mysterious kidnapping case.",
-      "Hero is an NRI who returns to India.",
-      "Hero helps his ex-girlfriend find her missing daughter.",
-      "No one else believes the missing girl even exists.",
-      "The missing girl turns out to be the hero’s own daughter."
+      "Hero is an NRI who lives a peaceful life in San Francisco.",
+      "One day, his ex-girlfriend calls him with a shocking request.",
+      "She says her daughter has been kidnapped, but no one believes her.",
+      "He returns to India and starts investigating the missing girl.",
+      "The truth he finds connects the girl to his own life in a shocking way."
     ],
     "details": {
-      "Hero": "Adivi Sesh",
       "Director": "Ravikanth Perepu",
       "Music": "Sricharan Pakala",
       "Release Date": "26 February 2016",
       "IMDB": "8.2/10",
-      "Trivia": "This film was officially remade in multiple languages — most notably in Hindi as Baaghi 2.  "
+      "Trivia": "This film was officially remade in multiple languages — most notably in Hindi as Baaghi 2."
     }
   },
   "2025-07-03": {
     "answer": "Mathu Vadalara",
     "hints": [
-      "This 2019 dark comedy-thriller revolves around three close friends.",
-      "The hero is a delivery boy struggling with money problems.",
-      "He tries to steal ₹500 from an old lady during a delivery.",
-      "He unexpectedly finds ₹10 lakhs in his delivery bags.",
-      "He gets stuck in a murder and drug case inside an apartment."
+      "Hero is a broke delivery boy fed up with his daily struggles.",
+      "He decides to steal a little money from an old lady’s flat.",
+      "Inside the apartment, he finds a bag with a huge amount of cash.",
+      "But things go wrong when a murder and drug case trap him inside.",
+      "With the help of his two best friends, he tries to escape the mess."
     ],
     "details": {
-      "Hero": "Simha Koduri",
       "Director": "Ritesh Rana",
       "Music": "Kaala Bhairava",
-      "Release Date": "26 February 2016",
+      "Release Date": "26 December 2019",
       "IMDB": "8.2/10",
       "Trivia": "The production used an actual retired police constable as a body double for Banerjee’s scenes — to perfect the gait and mannerisms of a real cop."
+    }
+  },
+  "2025-07-04": {
+    "answer": "Orange",
+    "hints": [
+      "Hero is a lively guy in Australia who doesn’t believe in forever love.",
+      "He falls for a sweet girl who wants a relationship that lasts forever.",
+      "He hides his real thoughts just to keep her happy.",
+      "Slowly, his painful past love story begins to surface.",
+      "In the end, he must choose between his beliefs and her dreams."
+    ],
+    "details": {
+      "Director": "Bommarillu Bhaskar",
+      "Music": "Harris Jayaraj",
+      "Release Date": "26 November 2010",
+      "IMDB": "6.5/10",
+      "Trivia": "The film is the largest Indian budget film that was mostly shot in Australia.[16] Over two hundred and fifty people from Australia were a part of the cast and crew."
     }
   }
 }

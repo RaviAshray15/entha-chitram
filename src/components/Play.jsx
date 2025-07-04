@@ -12,7 +12,7 @@ function Play() {
   const selectedDate = location.state?.date || new Date();
   const formattedDate = new Date(selectedDate).toDateString();
   const isHardDay = new Date(selectedDate).getDay() === 0;
-
+ 
   const [hintsShown, setHintsShown] = useState(1);
   const [guess, setGuess] = useState('');
   const [result, setResult] = useState(null);
@@ -95,7 +95,7 @@ function Play() {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-center px-4 flex flex-col justify-center items-center">
         <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-100 mb-4">
-          No movie set for <span className="text-rose-600 dark:text-rose-400">{formattedDate}</span>
+          No movie set for <span className="text-rose-600 dark:text-rose-500">{formattedDate}</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mb-6">
           Don’t pick future dates, bro you ain't Doctor Strange. 😭
@@ -314,9 +314,8 @@ function Play() {
             >
               &times;
             </button>
-            <h2 className="text-base font-bold text-rose-600 dark:text-rose-400 mb-4 text-center">Movie Details</h2>
+            <h2 className="text-base font-bold text-rose-600 dark:text-rose-500 mb-4 text-center">Movie Details</h2>
             <div className="text-base text-gray-800 dark:text-gray-200 space-y-2 text-center">
-              <p><span className="font-semibold">Hero:</span> {movieForDay.details?.Hero}</p>
               <p><span className="font-semibold">Director:</span> {movieForDay.details?.Director}</p>
               <p><span className="font-semibold">Music:</span> {movieForDay.details?.Music}</p>
               <p><span className="font-semibold">Release Date:</span> {movieForDay.details?.["Release Date"]}</p>

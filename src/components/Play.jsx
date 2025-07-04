@@ -168,7 +168,7 @@ function Play() {
           Next Day →
         </button>
         <button onClick={() => setShowStreakModal(true)}
-          className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-500">
+          className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-700">
           📊 Streak
         </button>
       </div>
@@ -230,7 +230,7 @@ function Play() {
             disabled={hintsShown < hints.length}
             className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown < hints.length
               ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500'
+              : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700'
               }`}
           >
             Show Details
@@ -261,18 +261,18 @@ function Play() {
             <div className="flex justify-center gap-3 flex-wrap mt-4">
               <button
                 onClick={tryAgain}
-                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
+                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
               >
                 Try Again
               </button>
               <button
                 onClick={goBack}
-                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
+                className="px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
               >
                 Check Other Dates
               </button>
               <button onClick={() => setShowStreakModal(true)}
-                className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-500">
+                className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-700">
                 📊 Streak
               </button>
             </div>

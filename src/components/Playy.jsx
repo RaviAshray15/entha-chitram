@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
 
 function Play() {
-  const goBack = () => navigate(-1);
-  const goHome = () => navigate('/');
+  const goBack = () => { navigate(-1); };
+  const goHome = () => { navigate('/') };
   const location = useLocation();
   const navigate = useNavigate();
   const selectedDate = location.state?.date || new Date();
   const formattedDate = new Date(selectedDate).toDateString();
   const isHardDay = new Date(selectedDate).getDay() === 0;
-
+ 
   const [hintsShown, setHintsShown] = useState(1);
   const [guess, setGuess] = useState('');
   const [result, setResult] = useState(null);
@@ -21,7 +21,6 @@ function Play() {
   const [showLoseModal, setShowLoseModal] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [showStreakModal, setShowStreakModal] = useState(false);
 
   const dateKey = new Date(selectedDate).toLocaleDateString('en-CA');
   const movieForDay = movieData[dateKey];
@@ -33,9 +32,6 @@ function Play() {
 
   const winSound = new Audio('/sounds/win.mp3');
   const loseSound = new Audio('/sounds/lose.mp3');
-
-  const correctAnswer = movieForDay?.answer;
-  const hints = movieForDay?.hints || [];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,41 +52,11 @@ function Play() {
 
   useEffect(() => {
     const handleEsc = (e) => {
-      if (e.key === 'Escape') {
-        setShowDetails(false);
-        setShowStreakModal(false);
-      }
+      if (e.key === 'Escape') setShowDetails(false);
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, []);
-
-  useEffect(() => {
-    // Set streak info if not already set
-    if (localStorage.getItem('streak') === null) {
-      localStorage.setItem('streak', '0');
-      localStorage.setItem('guessed', '0');
-      localStorage.setItem('played', '0');
-    }
-  }, []);
-
-  const updateStreak = (won) => {
-    const lastPlayed = localStorage.getItem('lastPlayed');
-    const today = new Date().toLocaleDateString('en-CA');
-    const playedSet = new Set(Object.keys(localStorage).filter(k => k.startsWith('result-')));
-
-    if (lastPlayed !== today) {
-      localStorage.setItem('lastPlayed', today);
-      localStorage.setItem('played', (+localStorage.getItem('played') + 1).toString());
-
-      if (won) {
-        localStorage.setItem('guessed', (+localStorage.getItem('guessed') + 1).toString());
-        localStorage.setItem('streak', (+localStorage.getItem('streak') + 1).toString());
-      } else {
-        localStorage.setItem('streak', '0');
-      }
-    }
-  };
 
   const handleSubmit = () => {
     const cleanGuess = guess.trim().toLowerCase();
@@ -103,7 +69,6 @@ function Play() {
       setResult('correct');
       setShowWinModal(true);
       localStorage.setItem(`result-${dateKey}`, 'correct');
-      updateStreak(true);
     } else if (hintsShown < hints.length) {
       setFeedback('Wrong guess!');
       setHintsShown(hintsShown + 1);
@@ -113,7 +78,6 @@ function Play() {
       setResult('wrong');
       setShowLoseModal(true);
       localStorage.setItem(`result-${dateKey}`, 'wrong');
-      updateStreak(false);
     }
   };
 
@@ -125,7 +89,6 @@ function Play() {
     setShowLoseModal(false);
     setShowAnswer(false);
     setShowDetails(false);
-    setFeedback('');
   };
 
   if (!movieForDay) {
@@ -144,32 +107,53 @@ function Play() {
     );
   }
 
+  const correctAnswer = movieForDay.answer;
+  const hints = movieForDay.hints;
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-10 pb-96 flex flex-col items-center font-['Inter']">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-['Inter'] px-4 py-10 pb-96 flex flex-col items-center">
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
       <button className="text-3xl font-bold text-rose-600 dark:text-rose-500 mb-2" onClick={goHome}>Entha Chitram</button>
-      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{formattedDate}</p>
 
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">{formattedDate}</p>
       {isHardDay && (
         <div className="mb-6 inline-block bg-red-100 text-red-700 font-semibold text-sm px-3 py-1 rounded-full uppercase tracking-wide dark:bg-red-900 dark:text-red-300">
           💀 Hard Day!
         </div>
       )}
 
-      <div className="flex gap-3 mb-6 flex-wrap justify-center">
-        <button onClick={goBack} className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition dark:hover:bg-rose-500">Other Days</button>
-        <button onClick={() => navigate('/play', { state: { date: prevDate }, replace: true })} disabled={!prevDate}
-          className={`px-4 py-2 text-sm rounded transition ${prevDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
+      {/* Navigation */}
+      <div className="flex gap-3 mb-6">
+        <button
+          onClick={goBack}
+          className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition dark:hover:bg-rose-500"
+        >
+          Other Days
+        </button>
+
+        {/* Previous Day */}
+        <button
+          onClick={() => navigate('/play', { state: { date: prevDate } })}
+          disabled={!prevDate}
+          className={`px-4 py-2 text-sm rounded transition ${prevDate
+            ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500'
+            : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+            }`}
+        >
           ← Previous Day
         </button>
-        <button onClick={() => navigate('/play', { state: { date: nextDate }, replace: true })} disabled={!nextDate}
-          className={`px-4 py-2 text-sm rounded transition ${nextDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
+
+        {/* Next Day */}
+        <button
+          onClick={() => navigate('/play', { state: { date: nextDate } })}
+          disabled={!nextDate}
+          className={`px-4 py-2 text-sm rounded transition ${nextDate
+            ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500'
+            : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
+            }`}
+        >
           Next Day →
-        </button>
-        <button onClick={() => setShowStreakModal(true)}
-          className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-500">
-          📊 Streak
         </button>
       </div>
 
@@ -341,23 +325,6 @@ function Play() {
         </div>
       )}
 
-
-      {showStreakModal && (
-        <div onClick={() => setShowStreakModal(false)} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div onClick={e => e.stopPropagation()} className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center relative">
-            <button className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl" onClick={() => setShowStreakModal(false)}>&times;</button>
-            <h2 className="text-xl font-bold text-rose-600 dark:text-rose-500 mb-4">🔥 My Streak</h2>
-            <p className="mb-2"><strong>Current Streak:</strong> {localStorage.getItem('streak') || 0}</p>
-            <p className="mb-2"><strong>Movies Guessed:</strong> {localStorage.getItem('guessed') || 0}</p>
-            <p className="mb-2"><strong>Total Played:</strong> {localStorage.getItem('played') || 0}</p>
-            <p><strong>Win Percentage:</strong> {
-              localStorage.getItem('played') > 0
-                ? Math.round((+localStorage.getItem('guessed') / +localStorage.getItem('played')) * 100)
-                : 0
-            }%</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

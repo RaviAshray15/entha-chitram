@@ -7,7 +7,8 @@ const playlist = [
     { title: 'Mental Madhilo | OK Bangaram', src: '/sounds/mentalmadhilo.mp3' },
     { title: 'Entha Chitram | Ante Sundaraaniki', src: '/sounds/enthachitram.mp3' },
     { title: 'Adhento Gaani Vunnapaatuga | Jersey', src: '/sounds/adhento.mp3' },
-    { title: 'Ee Hridayam | Ye Maaya Chesave', src: '/sounds/hridayam.mp3' }
+    { title: 'Ee Hridayam | Ye Maaya Chesave', src: '/sounds/hridayam.mp3' },
+    { title: 'Minnalvala | Narivetta', src: '/sounds/narivetta.mp3' }
 ];
 
 function AudioPlayer({ autoPlay = false }) {

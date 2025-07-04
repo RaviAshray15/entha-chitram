@@ -271,6 +271,10 @@ function Play() {
               >
                 Check Other Dates
               </button>
+              <button onClick={() => setShowStreakModal(true)}
+                className="px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700 transition dark:hover:bg-blue-500">
+                📊 Streak
+              </button>
             </div>
           </div>
         </div>
@@ -343,10 +347,10 @@ function Play() {
 
 
       {showStreakModal && (
-        <div onClick={() => setShowStreakModal(false)} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div onClick={e => e.stopPropagation()} className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center relative">
+        <div onClick={() => setShowStreakModal(false)} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 opacity-0 animate-fadeIn">
+          <div onClick={e => e.stopPropagation()} className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-11 rounded-lg shadow-lg w-full max-w-sm text-center relative">
             <button className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl" onClick={() => setShowStreakModal(false)}>&times;</button>
-            <h2 className="text-xl font-bold text-rose-600 dark:text-rose-500 mb-4">🔥 My Streak</h2>
+            <h2 className="text-xl font-bold text-rose-600 dark:text-rose-500 mb-6">🔥 My Streak</h2>
             <p className="mb-2"><strong>Current Streak:</strong> {localStorage.getItem('streak') || 0}</p>
             <p className="mb-2"><strong>Movies Guessed:</strong> {localStorage.getItem('guessed') || 0}</p>
             <p className="mb-2"><strong>Total Played:</strong> {localStorage.getItem('played') || 0}</p>
@@ -355,6 +359,7 @@ function Play() {
                 ? Math.round((+localStorage.getItem('guessed') / +localStorage.getItem('played')) * 100)
                 : 0
             }%</p>
+            <p className='text-sm mt-6 text-gray-500'>Note: Even if you play 10 old games today, the streak logic will not change again today.</p>
           </div>
         </div>
       )}

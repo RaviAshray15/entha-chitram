@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Calendar from './components/Calendar';
 import Play from './components/Play';
-import AudioPlayer from './components/AudioPlayer'; // ✅ import the audio player
+import AudioPlayer from './components/AudioPlayer';
 import DarkMode from './components/DarkMode';
 
 function App() {

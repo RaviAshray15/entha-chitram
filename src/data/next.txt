@@ -4,33 +4,33 @@
     "hints": [
       "This 2022 Rom-Com movie revolves around religious boundaries.",
       "Hero works in an ad agency and Heroine is a professional photographer.",
-      "Both Hero & Heroine come from strict, orthodox families of different religions.",
-      "Both Hero & Heroine tell 2 different lies to convince their families.",
+      "They come from strict, orthodox families of different religions.",
+      "They tell 2 different lies to convince their own families.",
       "Heroine dreams of having her wedding on Amelia Island."
     ],
     "details": {
-      "Hero": "Natural Star Nani",
       "Director": "Vivek Athreya",
       "Music": "Vivek Sagar",
       "Release Date": "10 June 2022",
-      "IMDB": "7.6/10"
+      "IMDB": "7.6/10",
+      "Trivia": "This film grossed over $1 million in the U.S, making it Nani's 7th film to do so."
     }
   },
   "2025-07-02": {
     "answer": "Kshanam",
     "hints": [
-      "This 2016 thriller revolves around a mysterious kidnapping case.",
-      "Hero is an NRI who returns to India.",
-      "Hero helps his ex-girlfriend find her missing daughter.",
-      "Everyone around believes the heroine has a psychological disorder.",
-      "This film was remade in multiple languages, most popularly in Hindi as Baaghi 2."
+      "This 2016 thriller revolves around a mysterious kidnapping.",
+      "Hero is an NRI who returns to India after a call from his ex.",
+      "She asks his help to find her missing daughter.",
+      "Everyone insists the girl doesn’t even exist.",
+      "He later learns the girl is actually his own daughter."
     ],
     "details": {
-      "Hero": "Adivi Sesh",
       "Director": "Ravikanth Perepu",
       "Music": "Sricharan Pakala",
       "Release Date": "26 February 2016",
-      "IMDB": "8.2/10"
+      "IMDB": "8.2/10",
+      "Trivia": "This film was officially remade in multiple languages — most notably in Hindi as Baaghi 2."
     }
   },
   "2025-07-03": {
@@ -38,16 +38,84 @@
     "hints": [
       "This 2019 dark comedy-thriller revolves around three close friends.",
       "The hero is a delivery boy struggling with money problems.",
-      "He tries to steal ₹500 from an old lady during a delivery.",
+      "He tries to steal money from an old lady during a delivery.",
       "He unexpectedly finds ₹10 lakhs in his delivery bags.",
       "He gets stuck in a murder and drug case inside an apartment."
     ],
     "details": {
-      "Hero": "Simha Koduri",
       "Director": "Ritesh Rana",
       "Music": "Kaala Bhairava",
-      "Release Date": "26 February 2016",
-      "IMDB": "8.2/10"
+      "Release Date": "26 December 2019",
+      "IMDB": "8.2/10",
+      "Trivia": "The production used an actual retired police constable as a body double for Banerjee’s scenes — to perfect the gait and mannerisms of a real cop."
+    }
+  },
+  "2025-07-04": {
+    "answer": "Orange",
+    "hints": [
+      "This 2010 romantic drama is about a hero who doesn’t believe in forever love.",
+      "He lives in Australia and he is a graffiti artist.",
+      "He falls for a girl who wants a lifelong relationship",
+      "He shares his past love story with a police officer.",
+      "In the end, he realizes that sacrifice is a part of true love."
+    ],
+    "details": {
+      "Director": "Bommarillu Bhaskar",
+      "Music": "Harris Jayaraj",
+      "Release Date": "26 November 2010",
+      "IMDB": "6.5/10",
+      "Trivia": "The film is the largest Indian budget film that was mostly shot in Australia. Over two hundred and fifty people from Australia were a part of the cast and crew."
+    }
+  },
+  "2025-07-05": {
+    "answer": "Khaleja",
+    "hints": [
+      "This 2010 action drama that revolves around a mysterious illness spreading in a village.",
+      "Hero is a taxi driver who ends up in Rajasthan for an unexpected task.",
+      "Locals believe he’s a godsent savior who will protect them.",
+      "He finds out someone is secretly behind the sickness.",
+      "In the end, he fights back to save the villagers and fulfill their belief."
+    ],
+    "details": {
+      "Director": "Trivikram Srinivas",
+      "Music": "Manisharma",
+      "Release Date": "7th October 2010",
+      "IMDB": "7.6/10",
+      "Trivia": "Khaleja’s climax fight scene was shot in a single take using a steadicam — it lasted over 4 minutes without a cut."
+    }
+  },
+  "2025-07-06": {
+    "answer": "Sreekaram",
+    "hints": [
+      "This 2021 drama revolves around farming.",
+      "Hero is a software engineer working in Hyderabad.",
+      "He quits his job to return to his village and take up farming.",
+      "He faces resistance from his father and other villagers.",
+      "He inspires youth to value agriculture and rebuild rural life."
+    ],
+    "details": {
+      "Director": "Kishore B.",
+      "Music": "Mickey J. Meyer",
+      "Release Date": "11th March 2021",
+      "IMDB": "7.1/10",
+      "Trivia": "To stay authentic, Sharwanand actually learned farming methods before shooting the film."
+    }
+  },
+  "2025-07-07": {
+    "answer": "Bheeshma",
+    "hints": [
+      "This 2020 rom-com revolves around organic farming.",
+      "Hero is a single meme creator with no real goals in life.",
+      "He falls for a girl who works at an organic farming company.",
+      "Due to unexpected events, he becomes the CEO for 30 days.",
+      "He must prove himself while exposing a dangerous chemical scam."
+    ],
+    "details": {
+      "Director": "Venky Kudumula",
+      "Music": "Mahati Swara Sagar",
+      "Release Date": "21th February 2020",
+      "IMDB": "6.6/10",
+      "Trivia": "The name 'Bheeshma' appears over 150 times in the movie. That's once every 90 seconds."
     }
   }
 }

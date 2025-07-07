@@ -22,6 +22,7 @@ function Play() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showStreakModal, setShowStreakModal] = useState(false);
+  const [showHardDayPopup, setShowHardDayPopup] = useState(false);
 
   const dateKey = new Date(selectedDate).toLocaleDateString('en-CA');
   const movieForDay = movieData[dateKey];
@@ -36,6 +37,18 @@ function Play() {
 
   const correctAnswer = movieForDay?.answer;
   const hints = movieForDay?.hints || [];
+
+  useEffect(() => {
+    if (isHardDay) {
+      setShowHardDayPopup(true);
+      const timeout = setTimeout(() => {
+        setShowHardDayPopup(false);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isHardDay]);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -137,7 +150,7 @@ function Play() {
         <p className="text-gray-500 dark:text-gray-400 mb-6">
           Don’t pick future dates, bro you ain't Doctor Strange. 😭
         </p>
-        <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition dark:hover:bg-rose-500" onClick={goBack}>
+        <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition dark:hover:bg-rose-700" onClick={goBack}>
           Check Other Dates
         </button>
       </div>
@@ -145,7 +158,18 @@ function Play() {
   }
 
   return (
+
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-10 pb-96 flex flex-col items-center font-['Inter']">
+      
+      {showHardDayPopup && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-30 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-red-700 text-white px-10 py-6 rounded-3xl shadow-2xl font-extrabold text-4xl sm:text-5xl md:text-6xl transform scale-90 animate-popup">
+            HARD DAY!!!
+          </div>
+        </div>
+      )}
+
+
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
       <button className="text-3xl font-bold text-rose-600 dark:text-rose-500 mb-2" onClick={goHome}>Entha Chitram</button>
@@ -158,13 +182,13 @@ function Play() {
       )}
 
       <div className="flex gap-3 mb-6 flex-wrap justify-center">
-        <button onClick={goBack} className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition dark:hover:bg-rose-500">Other Days</button>
+        <button onClick={goBack} className="px-4 py-2 bg-rose-600 text-white text-sm rounded hover:bg-rose-700 transition dark:hover:bg-rose-700">Other Days</button>
         <button onClick={() => navigate('/play', { state: { date: prevDate }, replace: true })} disabled={!prevDate}
-          className={`px-4 py-2 text-sm rounded transition ${prevDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
+          className={`px-4 py-2 text-sm rounded transition ${prevDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-700' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
           ← Previous Day
         </button>
         <button onClick={() => navigate('/play', { state: { date: nextDate }, replace: true })} disabled={!nextDate}
-          className={`px-4 py-2 text-sm rounded transition ${nextDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-500' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
+          className={`px-4 py-2 text-sm rounded transition ${nextDate ? 'bg-rose-600 text-white hover:bg-rose-700 dark:hover:bg-rose-700' : 'bg-gray-300 text-gray-600 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'}`}>
           Next Day →
         </button>
         <button onClick={() => setShowStreakModal(true)}
@@ -209,7 +233,7 @@ function Play() {
         <div className="w-32 flex flex-col gap-3">
           <button
             onClick={handleSubmit}
-            className="h-12 w-full bg-rose-600 text-white rounded-md text-sm font-semibold hover:bg-rose-700 dark:hover:bg-rose-500 transition"
+            className="h-12 w-full bg-rose-600 text-white rounded-md text-sm font-semibold hover:bg-rose-700 dark:hover:bg-rose-700 transition"
           >
             Submit
           </button>
@@ -219,7 +243,7 @@ function Play() {
             disabled={hintsShown >= hints.length}
             className={`h-12 mt-1 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
               ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-rose-600 hover:bg-rose-700 dark:hover:bg-rose-500'
+              : 'bg-rose-600 hover:bg-rose-700 dark:hover:bg-rose-700'
               }`}
           >
             Show Hint
@@ -227,14 +251,15 @@ function Play() {
 
           <button
             onClick={() => setShowDetails(true)}
-            disabled={hintsShown < hints.length}
-            className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown < hints.length
+            disabled={hintsShown < hints.length || isHardDay}
+            className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown < hints.length || isHardDay
               ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
               : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700'
               }`}
           >
             Show Details
           </button>
+
         </div>
       </div>
 
@@ -295,13 +320,13 @@ function Play() {
             <div className="flex justify-center gap-3 flex-wrap mt-4">
               <button
                 onClick={tryAgain}
-                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
               >
                 Try Again
               </button>
               <button
                 onClick={goBack}
-                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-500"
+                className="mt-2 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
               >
                 Check Other Dates
               </button>

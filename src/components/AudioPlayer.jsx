@@ -3,12 +3,12 @@ import { Pause, Play, SkipBack, SkipForward, Volume2, Music2, X } from 'lucide-r
 import '../index.css';
 
 const playlist = [
+    { title: 'Vellipomakey | Saahasam Swaasaga ', src: '/sounds/vellipomakey.mp3' },
     { title: 'Poyi Raa Mama | Kuberaa ', src: '/sounds/poyira.mp3' },
     { title: 'Mental Madhilo | OK Bangaram', src: '/sounds/mentalmadhilo.mp3' },
     { title: 'Entha Chitram | Ante Sundaraaniki', src: '/sounds/enthachitram.mp3' },
     { title: 'Adhento Gaani Vunnapaatuga | Jersey', src: '/sounds/adhento.mp3' },
-    { title: 'Ee Hridayam | Ye Maaya Chesave', src: '/sounds/hridayam.mp3' },
-    { title: 'Minnalvala | Narivetta', src: '/sounds/narivetta.mp3' }
+    { title: 'Ee Hridayam | Ye Maaya Chesave', src: '/sounds/hridayam.mp3' }
 ];
 
 function AudioPlayer({ autoPlay = false }) {

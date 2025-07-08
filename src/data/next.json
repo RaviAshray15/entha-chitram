@@ -117,5 +117,39 @@
       "IMDB": "6.6/10",
       "Trivia": "The name 'Bheeshma' appears over 150 times in the movie. That's once every 90 seconds."
     }
+  },
+  "2025-07-08": {
+    "answer": "1: Nenokkadine",
+    "hints": [
+      "This 2014 thriller is about a man searching for answers about his childhood.",
+      "Hero is a rockstar.",
+      "Heroine is a news reporter tries to help him.",
+      "He believes someone killed his parents, but no one remembers them.",
+      "He goes on a journey to find the truth about his past and who the killers are."
+    ],
+    "details": {
+      "Director": "Sukumar",
+      "Music": "Devi Sri Prasad",
+      "Release Date": "10 January 2014",
+      "IMDB": "8.0/10",
+      "Trivia": "The film’s editor used reverse cuts in key scenes to make the audience feel the same confusion the hero feels, almost like your brain is glitching."
+    }
+  },
+  "2025-07-09": {
+    "answer": "Dasara",
+    "hints": [
+      "This 2023 action drama is set in a coal-mining village in Telangana.",
+      "Hero is a young man who grows up with childhood friends in a rough and poor environment.",
+      "He has feelings for the heroine but keeps them hidden for years.",
+      "A close friend’s tragic death changes everything.",
+      "This movie name is a famous Hindu festival."
+    ],
+    "details": {
+      "Director": "Srikanth Odela",
+      "Music": "Santhosh Narayanan",
+      "Release Date": "30 March 2023",
+      "IMDB": "6.7/10",
+      "Trivia": "Nani learned the local dialect and completely changed his body language for the film."
+    }
   }
 }

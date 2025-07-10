@@ -134,5 +134,40 @@
       "IMDB": "8.0/10",
       "Trivia": "The film’s editor used reverse cuts in key scenes to make the audience feel the same confusion the hero feels, almost like your brain is glitching."
     }
+  },
+  "2025-07-09": {
+    "answer": "Yeto Vellipoyindhi Manasu",
+    "hints": [
+      "This 2012 love story shows the same couple in school, college, and as adults.",
+      "They keep falling in love… and also fighting a lot.",
+      "The hero is a software guy. The heroine becomes a teacher.",
+      "It’s all about misunderstandings and second chances.",
+      "Nani is the protagonist, and Ilaiyaraaja is the music director."
+    ],
+    "details": {
+      "Director": "Gautham Vasudev Menon",
+      "Music": "Ilaiyaraaja",
+      "Release Date": "14 December 2012",
+      "IMDB": "7.3/10",
+      "Trivia": "Ilaiyaraaja recorded the score with a live orchestra in London, giving it a super emotional vibe."
+    }
+  },
+  "2025-07-10": {
+  "answer": "Kalki 2898 AD",
+  "hints": [
+    "This 2024 movie is set in the far future which revolves around a big city controls everything.",
+    "Hero lives in the slums and takes risky jobs to chase a better life.",
+    "A gang tries to kill a pregnant woman for mysterious reasons.",
+    "Someone risks his life to protect her.",
+    "This movie is a mix of future and Indian history."
+  ],
+  "details": {
+    "Director": "Nag Ashwin",
+    "Music": "Santhosh Narayanan",
+    "Release Date": "27 June 2024",
+    "IMDB": "8.1/10",
+    "Trivia": "The movie was made with a ₹600+ crore budget and mixes Indian mythology with futuristic sci-fi."
   }
+}
+
 }

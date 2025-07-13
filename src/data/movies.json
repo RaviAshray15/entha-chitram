@@ -55,7 +55,7 @@
     "hints": [
       "This 2010 romantic drama is about a hero who doesn’t believe in forever love.",
       "He lives in Australia and he is a graffiti artist.",
-      "He falls for a girl who wants a lifelong relationship",
+      "He falls for a girl who wants a lifelong relationship.",
       "He shares his past love story with a police officer.",
       "In the end, he realizes that sacrifice is a part of true love."
     ],
@@ -149,7 +149,7 @@
       "Music": "Ilaiyaraaja",
       "Release Date": "14 December 2012",
       "IMDB": "7.3/10",
-      "Trivia": "Director Gautham Vasudev Menon simultaneously shot the film in Telugu, Tamil , and started a Hindi version, which was later shelved."
+      "Trivia": "Director Gautham Vasudev Menon simultaneously shot the film in Telugu, Tamil, and started a Hindi version, which was later shelved."
     }
   },
   "2025-07-10": {
@@ -169,19 +169,21 @@
       "Trivia": "Kalki 2898 AD became the first Indian film shot with the Arri Alexa 65 camera, offering high-resolution cinematography."
     }
   },
-  "answer": "Goodachari",
-  "hints": [
-    "This 2018 movie is about a young man who becomes a spy.",
-    "Hero wants to serve the country like his father.",
-    "He joins a secret agency and trains hard.",
-    "Bad people attack and blame him for it.",
-    "He runs and finds out who is behind everything."
-  ],
-  "details": {
-    "Director": "Sashi Kiran Tikka",
-    "Music": "Sricharan Pakala",
-    "Release Date": "3 August 2018",
-    "IMDB": "7.9/10",
-    "Trivia": "Goodachari was shot in 168 locations across 4 countries, all on a limited budget, without revealing to the public that a spy film was being made."
+  "2025-07-11": {
+    "answer": "Goodachari",
+    "hints": [
+      "This 2018 movie is about a young man who becomes a spy.",
+      "Hero wants to serve the country like his father.",
+      "He joins a secret agency and trains hard.",
+      "Bad people attack and blame him for it.",
+      "He runs and finds out who is behind everything."
+    ],
+    "details": {
+      "Director": "Sashi Kiran Tikka",
+      "Music": "Sricharan Pakala",
+      "Release Date": "3 August 2018",
+      "IMDB": "7.9/10",
+      "Trivia": "Goodachari was shot in 168 locations across 4 countries, all on a limited budget, without revealing to the public that a spy film was being made."
+    }
   }
 }

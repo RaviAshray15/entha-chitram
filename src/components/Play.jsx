@@ -291,9 +291,9 @@ function Play() {
           <button
             onClick={() => setHintsShown(hintsShown + 1)}
             disabled={hintsShown >= hints.length}
-            className={`h-12 mt-1 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
+            className={`h-12 mt-1 w-full text-gray-500 rounded-md text-sm font-semibold transition ${hintsShown >= hints.length
               ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-rose-600 hover:bg-rose-700 dark:hover:bg-rose-700'
+              : 'bg-rose-600 hover:bg-rose-700 dark:hover:bg-rose-700 text-white'
               }`}
           >
             Show Hint
@@ -302,9 +302,9 @@ function Play() {
           <button
             onClick={() => setShowDetails(true)}
             disabled={hintsShown < hints.length || isHardDay}
-            className={`h-12 w-full text-white rounded-md text-sm font-semibold transition ${hintsShown < hints.length || isHardDay
+            className={`h-12 w-full text-gray-500 rounded-md text-sm font-semibold transition ${hintsShown < hints.length || isHardDay
               ? 'bg-gray-300 dark:bg-gray-700 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700'
+              : 'bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700 text-white'
               }`}
           >
             Show Details
@@ -422,21 +422,28 @@ function Play() {
           onClick={() => setShowStreakModal(false)}
         >
           <div
-            className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center"
+            className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-2xl font-bold mb-4">Your Stats</h2>
-            <p>Current Streak: <strong>{localStorage.getItem('streak') || 0}</strong></p>
+            <button
+              onClick={() => setShowStreakModal(false)}
+              className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl hover:text-gray-700 dark:hover:text-white"
+            >
+              &times;
+            </button>
+
+            <h2 className="text-2xl font-bold mb-4 text-rose-500"> <strong>Your Streak 🔥</strong></h2>
+            <p>Current Streak: <strong>{localStorage.getItem('streak') || 0}</strong>🔥</p>
             <p>Games Played: <strong>{localStorage.getItem('played') || 0}</strong></p>
             <p>Games Guessed: <strong>{localStorage.getItem('guessed') || 0}</strong></p>
-            <button
-              className="mt-6 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
-              onClick={() => setShowStreakModal(false)}
-            >
-              Close
-            </button>
+            <p>Win Percentage: <strong>{
+              localStorage.getItem('played') > 0
+                ? Math.round((+localStorage.getItem('guessed') / +localStorage.getItem('played')) * 100)
+                : 0
+            }%</strong></p>
           </div>
         </div>
+
       )}
 
     </div>

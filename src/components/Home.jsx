@@ -86,7 +86,7 @@ function Home() {
         Our goal is to bring the community together through daily movie challenges.<br />
       </>
     ),
-    'Contact': (
+    'Contact Us': (
       <>
         Have feedback, questions, or ideas?<br /><br />
         Email us: <a href="mailto:raviashray15@gmail.com" className="text-rose-600 underline">raviashray15@gmail.com</a>

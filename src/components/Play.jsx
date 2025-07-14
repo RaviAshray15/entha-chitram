@@ -49,6 +49,17 @@ function Play() {
   const hints = movieForDay?.hints || [];
 
   useEffect(() => {
+    setGuess('');
+    setResult(null);
+    setHintsShown(1);
+    setShowWinModal(false);
+    setShowLoseModal(false);
+    setShowAnswer(false);
+    setShowDetails(false);
+    setFeedback('');
+  }, [dateKey]);
+
+  useEffect(() => {
     setLoading(true);
     const url = 'https://script.google.com/macros/s/AKfycbzmAQfv7nd0N_03fBHbqwbMBXsGuWIZPRSucpIqBo1H4Is_IfBrn5HMn7kohLmV87dB1w/exec';
 

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css';
 
-function Home({ darkMode, setDarkMode }) {
+function Home() {
   useEffect(() => {
     if (window.history.length > 1) {
       window.history.pushState(null, '', window.location.href);

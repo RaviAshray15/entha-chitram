@@ -1,15 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import movieData from '../data/movies.json';
 import { distance } from 'fastest-levenshtein';
 import confetti from 'canvas-confetti';
 
 function Play() {
+  const [movieData, setMovieData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
   const goBack = () => navigate(-1);
   const goHome = () => navigate('/');
   const location = useLocation();
-  const navigate = useNavigate();
+
   const selectedDate = location.state?.date || new Date();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const selectedDateObj = new Date(selectedDate);
+  selectedDateObj.setHours(0, 0, 0, 0);
+
+  const isFuture = selectedDateObj > today;
+
   const formattedDate = new Date(selectedDate).toDateString();
   const isHardDay = new Date(selectedDate).getDay() === 0;
 
@@ -23,6 +33,7 @@ function Play() {
   const [showDetails, setShowDetails] = useState(false);
   const [showStreakModal, setShowStreakModal] = useState(false);
   const [showHardDayPopup, setShowHardDayPopup] = useState(false);
+  const [feedback, setFeedback] = useState('');
 
   const dateKey = new Date(selectedDate).toLocaleDateString('en-CA');
   const movieForDay = movieData[dateKey];
@@ -30,7 +41,6 @@ function Play() {
   const currentIndex = allDates.indexOf(dateKey);
   const prevDate = allDates[currentIndex - 1];
   const nextDate = allDates[currentIndex + 1];
-  const [feedback, setFeedback] = useState('');
 
   const winSound = new Audio('/sounds/win.mp3');
   const loseSound = new Audio('/sounds/lose.mp3');
@@ -39,16 +49,55 @@ function Play() {
   const hints = movieForDay?.hints || [];
 
   useEffect(() => {
+    setLoading(true);
+    const url = 'https://script.google.com/macros/s/AKfycbzmAQfv7nd0N_03fBHbqwbMBXsGuWIZPRSucpIqBo1H4Is_IfBrn5HMn7kohLmV87dB1w/exec';
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedData = {};
+
+        Object.keys(data).forEach((key) => {
+          const movie = data[key];
+          formattedData[key] = {
+            answer: movie.answer,
+            hints: [
+              movie.hint1,
+              movie.hint2,
+              movie.hint3,
+              movie.hint4,
+              movie.hint5,
+            ].filter(Boolean),
+            details: {
+              Director: movie.director,
+              Music: movie.music,
+              'Release Date': movie.release_date,
+              IMDB: movie.imdb,
+              Trivia: movie.trivia,
+            },
+          };
+        });
+
+        setMovieData(formattedData);
+      })
+      .catch(() => {
+        setMovieData({});
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+
+  useEffect(() => {
     if (isHardDay) {
       setShowHardDayPopup(true);
       const timeout = setTimeout(() => {
         setShowHardDayPopup(false);
-      }, 3000);
-
+      }, 2000);
       return () => clearTimeout(timeout);
     }
   }, [isHardDay]);
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -79,7 +128,6 @@ function Play() {
   }, []);
 
   useEffect(() => {
-    // Set streak info if not already set
     if (localStorage.getItem('streak') === null) {
       localStorage.setItem('streak', '0');
       localStorage.setItem('guessed', '0');
@@ -90,7 +138,6 @@ function Play() {
   const updateStreak = (won) => {
     const lastPlayed = localStorage.getItem('lastPlayed');
     const today = new Date().toLocaleDateString('en-CA');
-    const playedSet = new Set(Object.keys(localStorage).filter(k => k.startsWith('result-')));
 
     if (lastPlayed !== today) {
       localStorage.setItem('lastPlayed', today);
@@ -141,7 +188,15 @@ function Play() {
     setFeedback('');
   };
 
-  if (!movieForDay) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (!movieForDay || isFuture) {
     return (
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-center px-4 flex flex-col justify-center items-center">
         <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-100 mb-4">
@@ -158,9 +213,8 @@ function Play() {
   }
 
   return (
-
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-10 pb-96 flex flex-col items-center font-['Inter']">
-      
+
       {showHardDayPopup && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-30 backdrop-blur-sm animate-fadeIn">
           <div className="bg-red-700 text-white px-10 py-6 rounded-3xl shadow-2xl font-extrabold text-4xl sm:text-5xl md:text-6xl transform scale-90 animate-popup">
@@ -168,7 +222,6 @@ function Play() {
           </div>
         </div>
       )}
-
 
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');`}</style>
 
@@ -197,9 +250,7 @@ function Play() {
         </button>
       </div>
 
-      {/* Game Box: Input + Hint + Buttons */}
       <div className="w-full max-w-2xl flex gap-4 mb-8 justify-center">
-        {/* Left side: Input + Hints */}
         <div className="flex-1 space-y-4">
           <input
             type="text"
@@ -229,7 +280,6 @@ function Play() {
           </div>
         </div>
 
-        {/* Right side: Buttons */}
         <div className="w-32 flex flex-col gap-3">
           <button
             onClick={handleSubmit}
@@ -259,7 +309,6 @@ function Play() {
           >
             Show Details
           </button>
-
         </div>
       </div>
 
@@ -271,7 +320,6 @@ function Play() {
         ⏰ Next movie in: <span className="font-semibold">{timeLeft}</span>
       </div>
 
-      {/* WIN Modal */}
       {showWinModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-0 animate-fadeIn">
           <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
@@ -305,7 +353,6 @@ function Play() {
         </div>
       )}
 
-      {/* LOSE Modal */}
       {showLoseModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 opacity-50 animate-fadeIn">
           <div className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center">
@@ -343,7 +390,6 @@ function Play() {
         </div>
       )}
 
-      {/* DETAILS Modal */}
       {showDetails && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -370,24 +416,29 @@ function Play() {
         </div>
       )}
 
-
       {showStreakModal && (
-        <div onClick={() => setShowStreakModal(false)} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 opacity-0 animate-fadeIn">
-          <div onClick={e => e.stopPropagation()} className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-11 rounded-lg shadow-lg w-full max-w-sm text-center relative">
-            <button className="absolute top-3 right-4 text-gray-500 dark:text-gray-300 text-xl" onClick={() => setShowStreakModal(false)}>&times;</button>
-            <h2 className="text-xl font-bold text-rose-600 dark:text-rose-500 mb-6">🔥 My Streak</h2>
-            <p className="mb-2"><strong>Current Streak:</strong> {localStorage.getItem('streak') || 0}</p>
-            <p className="mb-2"><strong>Movies Guessed:</strong> {localStorage.getItem('guessed') || 0}</p>
-            <p className="mb-2"><strong>Total Played:</strong> {localStorage.getItem('played') || 0}</p>
-            <p><strong>Win Percentage:</strong> {
-              localStorage.getItem('played') > 0
-                ? Math.round((+localStorage.getItem('guessed') / +localStorage.getItem('played')) * 100)
-                : 0
-            }%</p>
-            <p className='text-sm mt-6 text-gray-500'>Note: Even if you play 10 old games today, the streak logic will not change again today.</p>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setShowStreakModal(false)}
+        >
+          <div
+            className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full max-w-sm text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold mb-4">Your Stats</h2>
+            <p>Current Streak: <strong>{localStorage.getItem('streak') || 0}</strong></p>
+            <p>Games Played: <strong>{localStorage.getItem('played') || 0}</strong></p>
+            <p>Games Guessed: <strong>{localStorage.getItem('guessed') || 0}</strong></p>
+            <button
+              className="mt-6 px-4 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 dark:hover:bg-rose-700"
+              onClick={() => setShowStreakModal(false)}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
+
     </div>
   );
 }

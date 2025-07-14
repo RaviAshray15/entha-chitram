@@ -8,7 +8,7 @@ function getResultForDate(date) {
   return localStorage.getItem(`result-${key}`);
 }
 
-function CalendarPage({ darkMode, setDarkMode }) {
+function CalendarPage() {
   const launchDate = new Date(2025, 6, 1);
   const today = new Date();
   const isAfterLaunch = today >= launchDate;

@@ -224,7 +224,7 @@ function Play() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-10 pb-96 flex flex-col items-center font-['Inter']">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 px-4 py-10 pb-10 flex flex-col items-center font-['Inter']">
 
       {showHardDayPopup && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-30 backdrop-blur-sm animate-fadeIn">

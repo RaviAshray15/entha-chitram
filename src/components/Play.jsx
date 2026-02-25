@@ -214,7 +214,7 @@ function Play() {
           No movie set for <span className="text-rose-600 dark:text-rose-500">{formattedDate}</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mb-6">
-          Don’t pick future dates, bro you ain't Doctor Strange. 😭
+         Relax. The universe hasn’t loaded that day yet.
         </p>
         <button className="px-6 py-2 bg-rose-600 text-white rounded hover:bg-rose-700 transition dark:hover:bg-rose-700" onClick={goBack}>
           Check Other Dates

@@ -61,7 +61,7 @@ function Play() {
 
   useEffect(() => {
     setLoading(true);
-    const url = 'https://script.google.com/macros/library/d/168kEzNs_Vy6FsgwGBdmpxRulaVuFPYLaX85GyPcqoiZ-Qts7UbqSIZj2/14';
+    const url = 'https://script.google.com/macros/s/AKfycbwGyRxy1WEBwI5hm6TO_Iqo_7NmWTmf0U15eU6Kqf97A240SpSFnw8tTAT_YPCfxiEGKA/exec';
 
     fetch(url)
       .then((res) => res.json())

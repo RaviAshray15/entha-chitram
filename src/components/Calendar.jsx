@@ -9,7 +9,7 @@ function getResultForDate(date) {
 }
 
 function CalendarPage() {
-  const launchDate = new Date(2025, 6, 1);
+  const launchDate = new Date(2026, 1, 26);
   const today = new Date();
   const isAfterLaunch = today >= launchDate;
   const [selectedDate, setSelectedDate] = useState(isAfterLaunch ? today : null);
